@@ -12,6 +12,7 @@ import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import color from '../../Constant/color';
 
 export default function PersonalDetailsScreen() {
   const navigation = useNavigation();
@@ -31,173 +32,173 @@ export default function PersonalDetailsScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-
-        <View style={styles.header}>
-          <Pressable
-            onPress={() => navigation.goBack()}
-            onPressIn={() => setbackIconColor('gray')}
-            onPressOut={() => setbackIconColor('white')}
-          >
-            <Icon name="chevron-back" size={24} color={backiconColor} />
-          </Pressable>
-          <Text style={styles.headerTitle}>Edit Profile Details</Text>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Personal Information</Text>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>What's your name?</Text>
-            <View style={styles.nameInputContainer}>
-              <TextInput
-                style={styles.nameInput}
-                placeholder="First Name"
-                placeholderTextColor="#aaa"
-              />
-              <TextInput
-                style={styles.nameInput}
-                placeholder="Last Name"
-                placeholderTextColor="#aaa"
-              />
-            </View>
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>What is your current position?</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="e.g., Product Manager, CA, Software Engineer, etc."
-              placeholderTextColor="#aaa"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>What is your total work experience?</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Experience in years"
-              placeholderTextColor="#aaa"
-              keyboardType="numeric"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>What is your current organisation?</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="e.g., Apple, Google, Microsoft, etc."
-              placeholderTextColor="#aaa"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Location</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="e.g., Gurgaon, Mumbai, London, Tokyo, etc."
-              placeholderTextColor="#aaa"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Tell us how you can help?</Text>
-            <TextInput
-              style={[styles.textInput, styles.multilineInput]}
-              placeholder="I can help with..."
-              placeholderTextColor="#aaa"
-              maxLength={200}
-              multiline
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>When is your birthday?</Text>
-            <TouchableOpacity
-              style={styles.dateInputContainer}
-              onPress={showDatePicker}
-            >
-              <Text style={styles.dateText}>
-                {date ? date.toDateString() : 'Choose date'}
-              </Text>
-              <FontAwesome name="calendar" size={24} color="#aaa" />
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-              maximumDate={new Date()}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email ID</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your email ID"
-              placeholderTextColor="#aaa"
-              keyboardType="email-address"
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Phone Number</Text>
-            <View style={styles.phoneInputContainer}>
-              <Text style={styles.countryCode}>+91</Text>
-              <TextInput
-                style={styles.phoneInput}
-                placeholder="9142931325"
-                placeholderTextColor="#aaa"
-                keyboardType="phone-pad"
-              />
-            </View>
-          </View>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Services Pricing</Text>
-          <View style={styles.serviceContainer}>
-            <View style={styles.iconTextContainer}>
-              <FontAwesome name="phone" size={24} color="#00C853" />
-              <Text style={styles.serviceTitle}>Audio Call</Text>
-            </View>
-            <Text style={styles.serviceDescription}>
-              Set your hourly price; users will pay per minute.
-            </Text>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>₹ 100</Text>
-              <TouchableOpacity>
-                <MaterialIcons name="edit" size={24} color="#00C853" />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.serviceContainer}>
-            <View style={styles.iconTextContainer}>
-              <FontAwesome name="video-camera" size={24} color="#00C853" />
-              <Text style={styles.serviceTitle}>Video Call</Text>
-            </View>
-            <Text style={styles.serviceDescription}>
-              Set your hourly price; users will pay per minute.
-            </Text>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>₹ 250</Text>
-              <TouchableOpacity>
-                <MaterialIcons name="edit" size={24} color="#00C853" />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.serviceContainer}>
-            <View style={styles.iconTextContainer}>
-              <Entypo name="chat" size={24} color="#00C853" />
-              <Text style={styles.serviceTitle}>Chat</Text>
-            </View>
-            <Text style={styles.serviceDescription}>
-              Set price for users to initiate a chat.
-            </Text>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>₹ 20</Text>
-              <TouchableOpacity>
-                <MaterialIcons name="edit" size={24} color="#00C853" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <TouchableOpacity style={styles.updateButton}>
-          <Text style={styles.updateButtonText}>Update</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Pressable
+          onPress={() => navigation.goBack()}
+          onPressIn={() => setbackIconColor('gray')}
+          onPressOut={() => setbackIconColor('white')}
+        >
+          <Icon name="chevron-back" size={24} color={backiconColor} />
+        </Pressable>
+        <Text style={styles.headerTitle}>Edit Your Details</Text>
       </View>
-    </ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.childcontainer}>
+          <View style={styles.section}>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>What's your name?</Text>
+              <View style={styles.nameInputContainer}>
+                <TextInput
+                  style={styles.nameInput}
+                  placeholder="First Name"
+                  placeholderTextColor="#aaa"
+                />
+                <TextInput
+                  style={styles.nameInput}
+                  placeholder="Last Name"
+                  placeholderTextColor="#aaa"
+                />
+              </View>
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>What is your current position?</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="e.g., Product Manager, CA, Software Engineer, etc."
+                placeholderTextColor="#aaa"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>What is your total work experience?</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Experience in years"
+                placeholderTextColor="#aaa"
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>What is your current organisation?</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="e.g., Apple, Google, Microsoft, etc."
+                placeholderTextColor="#aaa"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Location</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="e.g., Gurgaon, Mumbai, London, Tokyo, etc."
+                placeholderTextColor="#aaa"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Tell us how you can help?</Text>
+              <TextInput
+                style={[styles.textInput, styles.multilineInput]}
+                placeholder="I can help with..."
+                placeholderTextColor="#aaa"
+                maxLength={200}
+                multiline
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>When is your birthday?</Text>
+              <TouchableOpacity
+                style={styles.dateInputContainer}
+                onPress={showDatePicker}
+              >
+                <Text style={styles.dateText}>
+                  {date ? date.toDateString() : 'Choose date'}
+                </Text>
+                <FontAwesome name="calendar" size={24} color="#aaa" />
+              </TouchableOpacity>
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+                maximumDate={new Date()}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Email ID</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter your email ID"
+                placeholderTextColor="#aaa"
+                keyboardType="email-address"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Phone Number</Text>
+              <View style={styles.phoneInputContainer}>
+                <Text style={styles.countryCode}>+91</Text>
+                <TextInput
+                  style={styles.phoneInput}
+                  placeholder="9142931325"
+                  placeholderTextColor="#aaa"
+                  keyboardType="phone-pad"
+                />
+              </View>
+            </View>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Services Pricing</Text>
+            <View style={styles.serviceContainer}>
+              <View style={styles.iconTextContainer}>
+                <FontAwesome name="phone" size={24} color="#00C853" />
+                <Text style={styles.serviceTitle}>Audio Call</Text>
+              </View>
+              <Text style={styles.serviceDescription}>
+                Set your hourly price; users will pay per minute.
+              </Text>
+              <View style={styles.priceContainer}>
+                <Text style={styles.priceText}>₹ 100</Text>
+                <TouchableOpacity>
+                  <MaterialIcons name="edit" size={24} color="#00C853" />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.serviceContainer}>
+              <View style={styles.iconTextContainer}>
+                <FontAwesome name="video-camera" size={24} color="#00C853" />
+                <Text style={styles.serviceTitle}>Video Call</Text>
+              </View>
+              <Text style={styles.serviceDescription}>
+                Set your hourly price; users will pay per minute.
+              </Text>
+              <View style={styles.priceContainer}>
+                <Text style={styles.priceText}>₹ 250</Text>
+                <TouchableOpacity>
+                  <MaterialIcons name="edit" size={24} color="#00C853" />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.serviceContainer}>
+              <View style={styles.iconTextContainer}>
+                <Entypo name="chat" size={24} color="#00C853" />
+                <Text style={styles.serviceTitle}>Chat</Text>
+              </View>
+              <Text style={styles.serviceDescription}>
+                Set price for users to initiate a chat.
+              </Text>
+              <View style={styles.priceContainer}>
+                <Text style={styles.priceText}>₹ 20</Text>
+                <TouchableOpacity>
+                  <MaterialIcons name="edit" size={24} color="#00C853" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.updateButton}>
+            <Text style={styles.updateButtonText}>Update</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -208,18 +209,24 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: color.backgroundcolor,
+  },
+  childcontainer: {
+    flex: 1,
     padding: 20,
+    backgroundColor: color.backgroundcolor,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    padding: 15,
+    backgroundColor: color.headercolor,
+    elevation: 5,
   },
   headerTitle: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 17,
     marginLeft: 10,
-    fontWeight: 'bold',
   },
   section: {
     marginBottom: 30,

@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   bookButtonText: {
-    color: '#96F97B',
+    color: color.text,
     fontSize: 16,
     fontWeight: 'bold',
   },

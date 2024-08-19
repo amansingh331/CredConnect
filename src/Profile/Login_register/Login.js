@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   radioContainer: {
-    width: '83%',
+    width: '85%',
     paddingHorizontal: 20,
     marginBottom: 20,
     marginTop: 10,

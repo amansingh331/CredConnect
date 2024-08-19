@@ -10,6 +10,9 @@ const colordata =
     text:'#00C853',
     // buttonpresscolor:'#8B0000',
     // Buttoncolor:'red',
+    // borderecolor:'red',
+    // text:'red',
+    //bookbutton:''#96F97B''
 }
 
 
