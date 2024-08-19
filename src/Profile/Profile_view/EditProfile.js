@@ -7,20 +7,40 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
+  Image,
 } from 'react-native';
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import color from '../../Constant/color';
+import { launchImageLibrary } from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker';
+
+
 
 export default function PersonalDetailsScreen() {
+  const [image, setImage] = useState('https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg');
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   const navigation = useNavigation();
   const [backiconColor, setbackIconColor] = useState('white');
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  // State for editing prices
   const [isEditingAudio, setIsEditingAudio] = useState(false);
   const [isEditingVideo, setIsEditingVideo] = useState(false);
   const [isEditingChat, setIsEditingChat] = useState(false);
@@ -57,6 +77,14 @@ export default function PersonalDetailsScreen() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.childcontainer}>
           <View style={styles.section}>
+            <View style={styles.profileSection}>
+              <View style={styles.imageWrapper}>
+                <Image source={{ uri: image }} style={styles.profileImage} />
+                <TouchableOpacity style={styles.iconContainer} onPress={pickImage}>
+                  <MaterialIcons name="add-circle" size={28} color="#00C853" />
+                </TouchableOpacity>
+              </View>
+            </View>
             <View style={styles.inputContainer}>
               <Text style={styles.label}>What's your name?</Text>
               <View style={styles.nameInputContainer}>
@@ -251,6 +279,23 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     backgroundColor: '#121212',
+  },
+  profileSection: {
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom:10,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: 5,
+    bottom: 5,
+    borderRadius: 50,
   },
   container: {
     flex: 1,

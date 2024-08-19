@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
       },
       activeFilter: {
-        backgroundColor: 'orange',
+        backgroundColor: color.Buttoncolor,
       },
       filterText: {
         color: 'white',
