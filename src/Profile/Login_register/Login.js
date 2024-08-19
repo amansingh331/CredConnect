@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View, StatusBar, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Color from '../../../src/Constant/color'
 
 export default function LoginForm() {
   const [click, setClick] = useState(false);
@@ -49,13 +50,13 @@ export default function LoginForm() {
           <Text style={styles.radioText}>Role:</Text>
           <View style={styles.radioButton}>
             <Pressable onPress={() => setrole(1)}>
-              <Icon name={role === 1 ? 'radio-button-on' : 'radio-button-off'} size={20} color='red' />
+              <Icon name={role === 1 ? 'radio-button-on' : 'radio-button-off'} size={20} color={Color.text} />
               <Text style={styles.radioLabel}>Student</Text>
             </Pressable>
           </View>
           <View style={styles.radioButton}>
             <Pressable onPress={() => setrole(2)}>
-              <Icon name={role === 2 ? 'radio-button-on' : 'radio-button-off'} size={20} color='red' />
+              <Icon name={role === 2 ? 'radio-button-on' : 'radio-button-off'} size={20} color={Color.text} />
               <Text style={styles.radioLabel}>Mentor</Text>
             </Pressable>
           </View>
@@ -90,7 +91,7 @@ export default function LoginForm() {
         </View>
 
         <View style={styles.mediaIcons}>
-          <Icon name="logo-google" size={40} color="red" style={styles.icon} />
+          <Icon name="logo-google" size={40} color="green" style={styles.icon} />
           <Icon name='logo-linkedin' size={40} color={'#0077b5'} style={styles.icon} />
           <Icon name="logo-instagram" size={40} color="#E4405F" style={styles.icon} />
         </View>
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center',
     paddingVertical: 40,
-    color: 'red',
+    color: Color.text,
   },
   inputView: {
     gap: 15,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     paddingHorizontal: 20,
-    borderColor: 'red',
+    borderColor: Color.borderecolor,
     borderWidth: 1,
     borderRadius: 7,
     color: 'white',
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'space-between',
-    borderColor: 'red',
+    borderColor: Color.borderecolor,
     borderWidth: 1,
     borderRadius: 7,
     height: 55,
@@ -182,17 +183,17 @@ const styles = StyleSheet.create({
   },
   forgetText: {
     fontSize: 11,
-    color: 'red',
+    color: Color.text,
   },
   button: {
-    backgroundColor: 'red',
+    backgroundColor: Color.Buttoncolor,
     height: 45,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
   buttonPressed: {
-    backgroundColor: '#8B0000',
+    backgroundColor: Color.buttonpresscolor,
   },
   buttonText: {
     color: 'white',
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   signup: {
-    color: 'red',
+    color: Color.Buttoncolor,
     fontSize: 13,
   },
 });
