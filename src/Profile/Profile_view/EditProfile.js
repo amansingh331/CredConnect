@@ -260,7 +260,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: color.backgroundcolor,
-    marginBottom:50,
   },
   header: {
     flexDirection: 'row',
@@ -348,6 +347,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1E1E1E',
     borderRadius: 10,
     padding: 15,
+    marginBottom:20,
   },
   iconTextContainer: {
     flexDirection: 'row',
@@ -383,7 +383,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
     width: '50%',
-    padding: 0,
   },
   updateButton: {
     backgroundColor: '#00C853',
