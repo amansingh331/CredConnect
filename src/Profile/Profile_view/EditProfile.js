@@ -20,12 +20,23 @@ export default function PersonalDetailsScreen() {
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+  // State for editing prices
+  const [isEditingAudio, setIsEditingAudio] = useState(false);
+  const [isEditingVideo, setIsEditingVideo] = useState(false);
+  const [isEditingChat, setIsEditingChat] = useState(false);
+
+  const [audioPrice, setAudioPrice] = useState('100');
+  const [videoPrice, setVideoPrice] = useState('250');
+  const [chatPrice, setChatPrice] = useState('20');
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
+
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
+
   const handleConfirm = (selectedDate) => {
     setDate(selectedDate);
     hideDatePicker();
@@ -138,7 +149,7 @@ export default function PersonalDetailsScreen() {
                 <Text style={styles.countryCode}>+91</Text>
                 <TextInput
                   style={styles.phoneInput}
-                  placeholder="9142931325"
+                  placeholder="9876543210"
                   placeholderTextColor="#aaa"
                   keyboardType="phone-pad"
                 />
@@ -147,6 +158,7 @@ export default function PersonalDetailsScreen() {
           </View>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Services Pricing</Text>
+
             <View style={styles.serviceContainer}>
               <View style={styles.iconTextContainer}>
                 <FontAwesome name="phone" size={24} color="#00C853" />
@@ -156,12 +168,23 @@ export default function PersonalDetailsScreen() {
                 Set your hourly price; users will pay per minute.
               </Text>
               <View style={styles.priceContainer}>
-                <Text style={styles.priceText}>₹ 100</Text>
-                <TouchableOpacity>
+                {isEditingAudio ? (
+                  <TextInput
+                    style={styles.priceInput}
+                    value={audioPrice}
+                    onChangeText={setAudioPrice}
+                    keyboardType="numeric"
+                    onBlur={() => setIsEditingAudio(false)}
+                  />
+                ) : (
+                  <Text style={styles.priceText}>₹ {audioPrice}/hr</Text>
+                )}
+                <TouchableOpacity onPress={() => setIsEditingAudio(true)}>
                   <MaterialIcons name="edit" size={24} color="#00C853" />
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={styles.serviceContainer}>
               <View style={styles.iconTextContainer}>
                 <FontAwesome name="video-camera" size={24} color="#00C853" />
@@ -171,12 +194,23 @@ export default function PersonalDetailsScreen() {
                 Set your hourly price; users will pay per minute.
               </Text>
               <View style={styles.priceContainer}>
-                <Text style={styles.priceText}>₹ 250</Text>
-                <TouchableOpacity>
+                {isEditingVideo ? (
+                  <TextInput
+                    style={styles.priceInput}
+                    value={videoPrice}
+                    onChangeText={setVideoPrice}
+                    keyboardType="numeric"
+                    onBlur={() => setIsEditingVideo(false)}
+                  />
+                ) : (
+                  <Text style={styles.priceText}>₹ {videoPrice}/hr</Text>
+                )}
+                <TouchableOpacity onPress={() => setIsEditingVideo(true)}>
                   <MaterialIcons name="edit" size={24} color="#00C853" />
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={styles.serviceContainer}>
               <View style={styles.iconTextContainer}>
                 <Entypo name="chat" size={24} color="#00C853" />
@@ -186,12 +220,23 @@ export default function PersonalDetailsScreen() {
                 Set price for users to initiate a chat.
               </Text>
               <View style={styles.priceContainer}>
-                <Text style={styles.priceText}>₹ 20</Text>
-                <TouchableOpacity>
+                {isEditingChat ? (
+                  <TextInput
+                    style={styles.priceInput}
+                    value={chatPrice}
+                    onChangeText={setChatPrice}
+                    keyboardType="numeric"
+                    onBlur={() => setIsEditingChat(false)}
+                  />
+                ) : (
+                  <Text style={styles.priceText}>₹ {chatPrice}/hr</Text>
+                )}
+                <TouchableOpacity onPress={() => setIsEditingChat(true)}>
                   <MaterialIcons name="edit" size={24} color="#00C853" />
                 </TouchableOpacity>
               </View>
             </View>
+
           </View>
           <TouchableOpacity style={styles.updateButton}>
             <Text style={styles.updateButtonText}>Update</Text>
@@ -215,6 +260,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: color.backgroundcolor,
+    marginBottom:50,
   },
   header: {
     flexDirection: 'row',
@@ -302,7 +348,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#1E1E1E',
     borderRadius: 10,
     padding: 15,
-    marginBottom: 15,
   },
   iconTextContainer: {
     flexDirection: 'row',
@@ -330,12 +375,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  priceInput: {
+    backgroundColor: '#1E1E1E',
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff',
+    width: '50%',
+    padding: 0,
+  },
   updateButton: {
     backgroundColor: '#00C853',
-    paddingVertical: 15,
-    borderRadius: 10,
+    paddingVertical: 12,
+    borderRadius: 5,
     alignItems: 'center',
-    marginBottom: 30,
+    marginTop: 0,
+    marginBottom:10,
   },
   updateButtonText: {
     color: '#fff',
@@ -343,3 +399,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
