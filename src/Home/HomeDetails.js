@@ -12,7 +12,6 @@ const CardList = ({ route}) => {
   const handleCardPress = (data) => {
     navigation.navigate('ProfileView', {data:data});
   };
-
   return (
     <>
     <HeaderComponent/>

@@ -3,6 +3,7 @@ import { Alert, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, Vi
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Color from '../../../src/Constant/color'
+import Process from '../../Process/process'
 
 export default function LoginForm() {
   const [click, setClick] = useState(false);
@@ -15,10 +16,28 @@ export default function LoginForm() {
   const handleSignup = () => {
     navigation.navigate('Register');
   };
-  
   const handleForget = () => {
     navigation.navigate('Forget');
   };
+
+  const LoginCall = () => {
+    if (username.length < 1) {
+      console.warn("Username cannot be empty");
+      return;
+    }
+    if (password.length < 1) {
+      console.warn("Password cannot be empty");
+      return;
+    }
+    const data = {
+      user:username,
+      pass:password,
+      role:role,
+      rememberMe:click,
+    }
+    Process.Login(data);
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -84,7 +103,7 @@ export default function LoginForm() {
             ]}
             onPressIn={() => setIsPressed(true)}
             onPressOut={() => setIsPressed(false)}
-            onPress={() => Alert.alert("Login Successfully!", "See you on my Instagram if you have questions: must_ait6")}>
+            onPress={LoginCall}>
             <Text style={styles.buttonText}>Log In</Text>
           </Pressable>
           <Text style={styles.optionsText}>OR LOGIN WITH</Text>

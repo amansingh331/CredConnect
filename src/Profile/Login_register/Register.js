@@ -4,17 +4,21 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 const logo = require("../../assets/logo.png");
 import Icon from 'react-native-vector-icons/Ionicons';
 import Color from '../../../src/Constant/color'
+import Process from '../../Process/process';
 
 export default function LoginForm() {
-  const [click, setClick] = useState(false);
   const [fname, setfname] = useState("");
   const [lname, setlname] = useState("");
   const [mobilenumber, setmobilenumber] = useState("");
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setrole] = useState(1);
+  const [click, setClick] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const navigation = useNavigation();
+
+
+  // Alert.alert("Login Successfully!", "See you on my Instagram if you have questions: must_ait6")}
 
   const handleLogin = () => {
     navigation.navigate('Login');
@@ -22,6 +26,45 @@ export default function LoginForm() {
   const handleForget = () => {
     navigation.navigate('Forget');
   };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const registerCall = () => {
+    if(fname.length < 1){
+      console.warn("enter first name");
+      return ;
+    }
+    if(lname.length < 1){
+      console.warn("enter last name");
+      return ;
+    }
+    if(email.length < 1 || !validateEmail(email)){
+      console.warn("enter right email");
+      return ;
+    }
+    if(mobilenumber.length !== 10){
+      console.warn("enter right number");
+      return ;
+    }
+    if(password.length < 1){
+      console.warn("enter password");
+      return ;
+    }
+    if(click === false){
+      console.warn("accept the term & condition");
+      return ;
+    }
+    const registerData = {
+      FName: fname, 
+      LName: lname, 
+      Email: email,
+      MobileNumber:mobilenumber,
+      Password:password,
+      Role:role,
+    }
+    Process.Register(registerData);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,7 +156,7 @@ export default function LoginForm() {
           ]}
           onPressIn={() => setIsPressed(true)}
           onPressOut={() => setIsPressed(false)}
-          onPress={() => Alert.alert("Login Successfully!", "See you on my Instagram if you have questions: must_ait6")}>
+          onPress={registerCall}>
           <Text style={styles.buttonText}>Register</Text>
         </Pressable>
         <Text style={styles.optionsText}>OR LOGIN WITH</Text>

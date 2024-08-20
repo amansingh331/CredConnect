@@ -5,6 +5,7 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderComponent from '../../component/Header/HeaderComponent';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
+import Process from '../../Process/process'
 
 const ProfileCard = ({route}) => {
   const navigation = useNavigation();
