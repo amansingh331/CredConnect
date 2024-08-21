@@ -5,7 +5,6 @@ import HeaderComponent from '../../component/Header/HeaderComponent';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
 import Process from '../../Process/process'
-import data1 from '../../Constant/HomeDetailsData';
 
 const ProfileCard = ({route}) => {
   const navigation = useNavigation();
