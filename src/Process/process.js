@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import HomeData from '../Constant/HomeDetailsData'
+import HomeDetailsData from '../Constant/HomeDetailsData';
+import HomeData from '../Constant/HomeData';
 
 const Login = async (data) => {
     try {
@@ -31,24 +32,62 @@ const Register = async (data) => {
     }
 };
 
-const checkUser = async () =>{
-    const storedEmail = await AsyncStorage.getItem('Email');
-    const storedPassword = await AsyncStorage.getItem('pass');
-    // if(storedEmail===null || storedPassword===null){
-    //     console.warn("user not exist");
-    //     return false;
-    // }else{
-    //     console.warn("user exist");
-    //     return true;
-    // }
-    return false;
-}
-const getUserId = async () =>{
-    const storedUserId = await AsyncStorage.getItem('userid');
-    return 1;
-}
-const getUserData = async () =>{
-    return HomeData[0];
-}
+const checkUser = async () => {
+    try {
+        const storedEmail = await AsyncStorage.getItem('Email');
+        const storedPassword = await AsyncStorage.getItem('pass');
+        return storedEmail !== null && storedPassword !== null;
+    } catch (error) {
+        console.error("Failed to check user:", error);
+        return false;
+    }
+};
+const getUserId = async () => {
+    try {
+        const storedUserId = await AsyncStorage.getItem('userid');
+        return storedUserId ? parseInt(storedUserId, 10) : 1;
+    } catch (error) {
+        console.error("Failed to get user ID:", error);
+        return 1;
+    }
+};
 
-export default { Login, Register, checkUser, getUserId, getUserData};
+
+const getUserData = async () => {
+    try {
+        return HomeDetailsData[0];
+    } catch (error) {
+        console.error("Failed to get user data:", error);
+        return {};
+    }
+};
+
+const getHomeData = async () => {
+    try {
+        return HomeData;
+    } catch (error) {
+        console.error("Failed to get home data:", error);
+        return [];
+    }
+};
+
+const getHomeDetailsData = async (itemId) => {
+    try {
+        
+        return HomeDetailsData;
+    } catch (error) {
+        console.error("Failed to get home details data:", error);
+        return [];
+    }
+};
+
+const getProfileData = async (data) => {
+    try {
+        return HomeDetailsData[data-1];
+    } catch (error) {
+        console.error("Failed to get home details data:", error);
+        return [];
+    }
+};
+
+export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData };

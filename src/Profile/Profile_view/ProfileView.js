@@ -1,14 +1,16 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, Image, Text, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HeaderComponent from '../../component/Header/HeaderComponent';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
 import Process from '../../Process/process'
+import data1 from '../../Constant/HomeDetailsData';
 
 const ProfileCard = ({route}) => {
   const navigation = useNavigation();
-  const data = route.params.data;
+  const userid = route.params.data;
+
   const handleVideoChat = async (data) => {
     try {
       const IsUserExist = await Process.checkUser();
@@ -45,6 +47,36 @@ const ProfileCard = ({route}) => {
       console.error("Something went wrong", error);
     }
   };
+  const [data, setdata] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchProfileData = async () => {
+        try {
+          const Profiledata = await Process.getProfileData(userid);
+          setdata(Profiledata);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchProfileData();
+    }, [userid])
+  );
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={color.Buttoncolor} />
+      </View>
+    );
+  }
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <>
       <HeaderComponent />

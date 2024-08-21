@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { ScrollView, View, StyleSheet, TouchableOpacity, Alert, Pressable, Dimensions, Text } from 'react-native';
+import { ScrollView, View, StyleSheet, TouchableOpacity, Alert, Pressable, Dimensions, Text, ActivityIndicator } from 'react-native';
 import Card from '../component/cardDesign';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import Homedata from '../Constant/HomeData';
 import color from '../Constant/color';
 import Process from '../Process/process';
 
@@ -42,6 +41,37 @@ const App = () => {
       console.error("Something went wrong", error);
     }
   };
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const HomeData = async () => {
+        try {
+          const HomeData = await Process.getHomeData();
+          setData(HomeData);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      HomeData();
+    }, [navigation])
+  );
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={color.Buttoncolor} />
+      </View>
+    );
+  }
+
+  if (!data) {
+    return null;
+  }
   return (
     <>
       <View style={styles.header}>
@@ -67,7 +97,7 @@ const App = () => {
       </View>
       <ScrollView style={styles.container}>
         <View style={styles.grid}>
-          <Card data={Homedata}/>
+          <Card data={data}/>
         </View>
       </ScrollView>
     </>

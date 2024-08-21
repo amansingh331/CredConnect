@@ -1,14 +1,16 @@
-import React, { useCallback } from 'react';
-import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Card from '../component/HomeCardDesign';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import HeaderComponent from '../../src/component/Header/HeaderComponent';
-import HomeDetailsData from '../Constant/HomeDetailsData';
 import color from '../Constant/color';
 import Process from '../Process/process';
 
 const CardList = ({ route }) => {
+  const id = route.params.itemId;
   const navigation = useNavigation();
+  const [HomeDetailsData, setHomeDetailsData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleCardPress = async (data) => {
     try {
@@ -16,12 +18,40 @@ const CardList = ({ route }) => {
       if (userid === data.userid) {
         navigation.navigate('Profile');
       } else {
-        navigation.navigate('ProfileView', { data: data });
+        navigation.navigate('ProfileView', { data: data.userid});
       }
     } catch (error) {
       console.error("Something went wrong", error);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchHomeDetailsData = async () => {
+        try {
+          const data = await Process.getHomeDetailsData(id);
+          setHomeDetailsData(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchHomeDetailsData();
+    }, [id])
+  );
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={color.Buttoncolor} />
+      </View>
+    );
+  }
+
+  if (!HomeDetailsData) {
+    return null;
+  }
 
   return (
     <>
@@ -59,6 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.backgroundcolor,
   },
 });
 
