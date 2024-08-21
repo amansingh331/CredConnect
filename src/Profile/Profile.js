@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import HeaderComponent from '../component/Header/HeaderComponent';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -7,31 +7,54 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Process from '../Process/process';
 import color from '../Constant/color';
 
-
 export default function Profile() {
   const navigation = useNavigation();
-  const [data, setdata] = useState("");
+  const [data, setData] = useState(null); // Initialize as null
+  const [loading, setLoading] = useState(true); // Loading state
+
   useFocusEffect(
     React.useCallback(() => {
       const checkLoginStatus = async () => {
-        const userExists = await Process.checkUser();
-        const id = await Process.getUserId();
-        const tempdata = await Process.getUserData();
-        console.warn(tempdata);
-        setdata(tempdata);
-        if(!userExists) {
-          navigation.navigate('Login');
+        try {
+          const userExists = await Process.checkUser();
+          if (!userExists) {
+            navigation.navigate('Login');
+            return;
+          }
+
+          const tempData = await Process.getUserData();
+          setData(tempData);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false); // Stop loading
         }
       };
+
       checkLoginStatus();
     }, [navigation])
   );
+
+  // Render loading indicator if data is still being fetched
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={color.Buttoncolor} />
+      </View>
+    );
+  }
+
+  // Render nothing if data is not yet available (fallback)
+  if (!data) {
+    return null;
+  }
+
   return (
     <>
       <HeaderComponent />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
-          <Pressable style={styles.editButton} onPress={()=>navigation.navigate('EditProfile')}>
+          <Pressable style={styles.editButton} onPress={() => navigation.navigate('EditProfile')}>
             <Icon2 name="account-edit" size={24} color="white" />
           </Pressable>
           <View style={styles.profileSection}>
@@ -44,8 +67,8 @@ export default function Profile() {
             <View style={styles.ratingRow}>
               <Icon name="star" size={16} color="orange" />
               <Text style={styles.ratingText}>{data.rating}</Text>
-              <Text style={{color:'white', marginLeft:12}}>|</Text>
-              <Text onPress={() => navigation.navigate('Review', {data:data})} style={styles.reviewText}>{data.review.length} reviews</Text>
+              <Text style={{ color: 'white', marginLeft: 12 }}>|</Text>
+              <Text onPress={() => navigation.navigate('Review', { data: data })} style={styles.reviewText}>{data.review.length} reviews</Text>
             </View>
             <View style={styles.locationRow}>
               <Icon name="location-outline" size={16} color="gray" />
@@ -60,16 +83,16 @@ export default function Profile() {
               <Icon name="call" size={24} color="green" />
               <Text style={styles.buttonText}>{data.callPrice}</Text>
             </Pressable>
-            <Pressable style={styles.actionButton} onPress={()=>navigation.navigate('VideoChat')}>
+            <Pressable style={styles.actionButton} onPress={() => navigation.navigate('VideoChat')}>
               <Icon name="videocam" size={24} color="dodgerblue" />
               <Text style={styles.buttonText}>{data.videoPrice}</Text>
             </Pressable>
-            <Pressable style={styles.actionButton} onPress={()=>navigation.navigate('chat')}>
+            <Pressable style={styles.actionButton} onPress={() => navigation.navigate('chat')}>
               <Icon name="chatbubble" size={24} color="orange" />
               <Text style={styles.buttonText}>{data.chatPrice}</Text>
             </Pressable>
           </View>
-         
+
           <View style={styles.bookingSection}>
             <View style={styles.availability}>
               <Text style={styles.availabilityText}>Available at</Text>
@@ -143,7 +166,7 @@ const styles = StyleSheet.create({
     color: 'gray',
     marginLeft: 10,
     fontSize: 14,
-    textDecorationLine:'underline'
+    textDecorationLine: 'underline'
   },
   locationRow: {
     flexDirection: 'row',
@@ -160,7 +183,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 20,
     marginBottom: 20,
-    fontSize:13,
+    fontSize: 13,
   },
   actionButtons: {
     flexDirection: 'row',
@@ -219,7 +242,7 @@ const styles = StyleSheet.create({
   container1: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#333', 
+    backgroundColor: '#333',
     padding: 15,
     borderRadius: 10,
   },
@@ -228,12 +251,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   joinedText: {
-    color: '#8A8A8A', 
+    color: '#8A8A8A',
     fontSize: 12,
     letterSpacing: 1.2,
   },
   dateText: {
-    color: 'white', 
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,
@@ -245,12 +268,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   iconsContainer1: {
-    paddingRight:20,
-    padding:10,
-    width:'70%',
+    paddingRight: 20,
+    padding: 10,
+    width: '70%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.backgroundcolor,
   },
 });
-

@@ -1,5 +1,3 @@
-import { View, Text } from 'react-native'
-import React from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeData from '../Constant/HomeDetailsData'
 
@@ -36,17 +34,17 @@ const Register = async (data) => {
 const checkUser = async () =>{
     const storedEmail = await AsyncStorage.getItem('Email');
     const storedPassword = await AsyncStorage.getItem('pass');
-    if(storedEmail===null || storedPassword===null){
-        console.warn("user not exist");
-        return false;
-    }else{
-        console.warn("user exist");
-        return true;
-    }
-    return true;
+    // if(storedEmail===null || storedPassword===null){
+    //     console.warn("user not exist");
+    //     return false;
+    // }else{
+    //     console.warn("user exist");
+    //     return true;
+    // }
+    return false;
 }
 const getUserId = async () =>{
-    const storedEmail = await AsyncStorage.getItem('Email');
+    const storedUserId = await AsyncStorage.getItem('userid');
     return 1;
 }
 const getUserData = async () =>{

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderComponent from '../../component/Header/HeaderComponent';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
@@ -10,14 +9,47 @@ import Process from '../../Process/process'
 const ProfileCard = ({route}) => {
   const navigation = useNavigation();
   const data = route.params.data;
+  const handleVideoChat = async (data) => {
+    try {
+      const IsUserExist = await Process.checkUser();
+      if (IsUserExist) {
+        navigation.navigate('VideoChat')
+      } else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  const handleAudioChat = async (data) => {
+    try {
+      const IsUserExist = await Process.checkUser();
+      if (IsUserExist) {
+        navigation.navigate('VideoChat')
+      } else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  const handleMessageChat = async (data) => {
+    try {
+      const IsUserExist = await Process.checkUser();
+      if (IsUserExist) {
+        navigation.navigate('chat')
+      } else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
   return (
     <>
       <HeaderComponent />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
-          <Pressable style={styles.editButton} onPress={()=>navigation.navigate('EditProfile')}>
-            <Icon2 name="account-edit" size={24} color="white" />
-          </Pressable>
           <View style={styles.profileSection}>
             <Image
               source={{ uri: data.image }}
@@ -40,15 +72,15 @@ const ProfileCard = ({route}) => {
             </Text>
           </View>
           <View style={styles.actionButtons}>
-            <Pressable style={styles.actionButton}>
-              <Icon name="call" size={24} color="green" />
+            <Pressable style={styles.actionButton} >
+              <Icon name="call" size={24} color="green" onPress={handleAudioChat}/>
               <Text style={styles.buttonText}>{data.callPrice}</Text>
             </Pressable>
-            <Pressable style={styles.actionButton} onPress={()=>navigation.navigate('VideoChat')}>
+            <Pressable style={styles.actionButton} onPress={handleVideoChat}>
               <Icon name="videocam" size={24} color="dodgerblue" />
               <Text style={styles.buttonText}>{data.videoPrice}</Text>
             </Pressable>
-            <Pressable style={styles.actionButton} onPress={()=>navigation.navigate('chat')}>
+            <Pressable style={styles.actionButton} onPress={handleMessageChat}>
               <Icon name="chatbubble" size={24} color="orange" />
               <Text style={styles.buttonText}>{data.chatPrice}</Text>
             </Pressable>

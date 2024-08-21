@@ -1,39 +1,50 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useCallback } from 'react';
+import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import Card from '../component/HomeCardDesign';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import HeaderComponent from '../../src/component/Header/HeaderComponent'
+import HeaderComponent from '../../src/component/Header/HeaderComponent';
 import HomeDetailsData from '../Constant/HomeDetailsData';
 import color from '../Constant/color';
+import Process from '../Process/process';
 
-const CardList = ({ route}) => {
-  const id = route.params.itemId;
+const CardList = ({ route }) => {
   const navigation = useNavigation();
-  const handleCardPress = (data) => {
-    navigation.navigate('ProfileView', {data:data});
+
+  const handleCardPress = async (data) => {
+    try {
+      const userid = await Process.getUserId();
+      if (userid === data.userid) {
+        navigation.navigate('Profile');
+      } else {
+        navigation.navigate('ProfileView', { data: data });
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
   };
+
   return (
     <>
-    <HeaderComponent/>
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-      {HomeDetailsData.map((item, index) => (
-      <TouchableOpacity onPress={() => handleCardPress(item)}>
-        <Card 
-          title={item.first_name + " " + item.last_name}
-          image={item.image}
-          description={item.description}
-          backgroundColor={item.backgroundColor}
-          rating={item.rating}
-          location={item.location}
-          callPrice={item.callPrice}
-          videoPrice={item.videoPrice}
-          chatPrice={item.chatPrice}
-        />
-      </TouchableOpacity>
-      ))}
-      </View>
-    </ScrollView>
+      <HeaderComponent />
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.container}>
+          {HomeDetailsData.map((item) => (
+            <TouchableOpacity key={item.userid} onPress={() => handleCardPress(item)}>
+              <Card
+                title={item.first_name + " " + item.last_name}
+                image={item.image}
+                description={item.description}
+                backgroundColor={item.backgroundColor}
+                rating={item.rating}
+                location={item.location}
+                callPrice={item.callPrice}
+                videoPrice={item.videoPrice}
+                chatPrice={item.chatPrice}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
     </>
   );
 };
@@ -45,9 +56,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   container: {
-    flexDirection: 'row', 
-    flexWrap: 'wrap',   
-    justifyContent: 'space-between', 
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 });
 

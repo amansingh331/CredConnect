@@ -6,22 +6,42 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Homedata from '../Constant/HomeData';
 import color from '../Constant/color';
+import Process from '../Process/process';
 
 const App = () => {
 
   const navigation = useNavigation();
-
   const [notificationiconColor, setnotificationIconColor] = useState('white');
   const [messageiconColor, setmessageIconColor] = useState('white');
-
   const screenWidth = Dimensions.get('window').width;
   const cardWidth = 160;
   const spacing = 10;
   const numColumns = Math.floor(screenWidth / (cardWidth + spacing));
 
-
-  
-
+  const handleNotification = async (data) => {
+    try {
+      const IsUserExist = await Process.checkUser();
+      if (IsUserExist) {
+        navigation.navigate('Notification');
+      } else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
+  const handleMessage = async (data) => {
+    try {
+      const IsUserExist = await Process.checkUser();
+      if (IsUserExist) {
+        navigation.navigate('Message')
+      } else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
+  };
   return (
     <>
       <View style={styles.header}>
@@ -30,14 +50,14 @@ const App = () => {
         </View>
         <View style={styles.headerright}>
           <Pressable
-            onPress={() => navigation.navigate('Notification')}
+            onPress={handleNotification}
             onPressIn={() => setnotificationIconColor('gray')}
             onPressOut={() => setnotificationIconColor('white')}
           >
             <Icon name="notifications-outline" size={24} color={notificationiconColor} />
           </Pressable>
           <Pressable
-            onPress={() => navigation.navigate('Message')}
+            onPress={handleMessage}
             onPressIn={() => setmessageIconColor('gray')}
             onPressOut={() => setmessageIconColor('white')}
           >
