@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,19 +8,21 @@ import {
   ScrollView,
   Pressable,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
 import { launchImageLibrary } from 'react-native-image-picker';
 import * as ImagePicker from 'expo-image-picker';
+import Process from '../../Process/process';
 
 
 
 export default function PersonalDetailsScreen() {
-  const [image, setImage] = useState('https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg');
+  const [image, setImage] = useState('');
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -62,6 +64,49 @@ export default function PersonalDetailsScreen() {
     hideDatePicker();
   };
 
+  const [data, setdata] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchEditProfileData = async () => {
+        try {
+          const EditProfiledata = await Process.getEditProfileData();
+          setdata(EditProfiledata);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchEditProfileData();
+    }, [])
+  );
+
+  useEffect(() => {
+    if (data) {
+      setAudioPrice(data.audio);
+      setVideoPrice(data.video);
+      setChatPrice(data.chat);
+      setImage(data.image);
+    }
+  }, [data]);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={color.Buttoncolor} />
+      </View>
+    );
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const handelUpdate = () => {
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -92,11 +137,13 @@ export default function PersonalDetailsScreen() {
                   style={styles.nameInput}
                   placeholder="First Name"
                   placeholderTextColor="#aaa"
+                  value={data.first_name}
                 />
                 <TextInput
                   style={styles.nameInput}
                   placeholder="Last Name"
                   placeholderTextColor="#aaa"
+                  value={data.last_name}
                 />
               </View>
             </View>
@@ -106,6 +153,7 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Product Manager, CA, Software Engineer, etc."
                 placeholderTextColor="#aaa"
+                value={data.position}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -115,6 +163,7 @@ export default function PersonalDetailsScreen() {
                 placeholder="Experience in years"
                 placeholderTextColor="#aaa"
                 keyboardType="numeric"
+                value={data.experience}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -123,6 +172,7 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Apple, Google, Microsoft, etc."
                 placeholderTextColor="#aaa"
+                value={data.currentCompany}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -131,6 +181,7 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Gurgaon, Mumbai, London, Tokyo, etc."
                 placeholderTextColor="#aaa"
+                value={data.location}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -141,6 +192,7 @@ export default function PersonalDetailsScreen() {
                 placeholderTextColor="#aaa"
                 maxLength={200}
                 multiline
+                value={data.helpyou}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -169,6 +221,7 @@ export default function PersonalDetailsScreen() {
                 placeholder="Enter your email ID"
                 placeholderTextColor="#aaa"
                 keyboardType="email-address"
+                value={data.email}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -180,6 +233,7 @@ export default function PersonalDetailsScreen() {
                   placeholder="9876543210"
                   placeholderTextColor="#aaa"
                   keyboardType="phone-pad"
+                  value={data.number}
                 />
               </View>
             </View>
@@ -266,7 +320,7 @@ export default function PersonalDetailsScreen() {
             </View>
 
           </View>
-          <TouchableOpacity style={styles.updateButton}>
+          <TouchableOpacity style={styles.updateButton} onPress={handelUpdate}>
             <Text style={styles.updateButtonText}>Update</Text>
           </TouchableOpacity>
         </View>

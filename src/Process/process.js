@@ -90,4 +90,17 @@ const getProfileData = async (data) => {
     }
 };
 
-export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData };
+const getEditProfileData = async () => {
+    const data = {userid:'121', image:'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg',first_name:'aman', last_name:'singh', position:'sde', experience:'10', currentCompany:'google', location:'patna', helpyou:'how i help other', birthday:'Thu Aug 22 2024', email:'amansingh@gmail.com', number:'9931495681', audio:'100', video:'250', chat:'20'};
+    try {
+        return data;
+    } catch (error) {
+        console.error("Failed to get home details data:", error);
+        return {};
+    }
+}
+const updateEditProfileData = async () => {
+    
+}
+
+export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData, getEditProfileData, updateEditProfileData };
