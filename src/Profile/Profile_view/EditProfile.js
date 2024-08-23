@@ -11,11 +11,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
-import { launchImageLibrary } from 'react-native-image-picker';
 import * as ImagePicker from 'expo-image-picker';
 import Process from '../../Process/process';
 
@@ -30,9 +28,6 @@ export default function PersonalDetailsScreen() {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -40,8 +35,6 @@ export default function PersonalDetailsScreen() {
 
   const navigation = useNavigation();
   const [backiconColor, setbackIconColor] = useState('white');
-  const [date, setDate] = useState(new Date());
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const [isEditingAudio, setIsEditingAudio] = useState(false);
   const [isEditingVideo, setIsEditingVideo] = useState(false);
@@ -50,19 +43,6 @@ export default function PersonalDetailsScreen() {
   const [audioPrice, setAudioPrice] = useState('100');
   const [videoPrice, setVideoPrice] = useState('250');
   const [chatPrice, setChatPrice] = useState('20');
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (selectedDate) => {
-    setDate(selectedDate);
-    hideDatePicker();
-  };
 
   const [data, setdata] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -137,13 +117,13 @@ export default function PersonalDetailsScreen() {
                   style={styles.nameInput}
                   placeholder="First Name"
                   placeholderTextColor="#aaa"
-                  value={data.first_name}
+                  value={data?.first_name || 'NA'}
                 />
                 <TextInput
                   style={styles.nameInput}
                   placeholder="Last Name"
                   placeholderTextColor="#aaa"
-                  value={data.last_name}
+                  value={data?.last_name || 'NA'}
                 />
               </View>
             </View>
@@ -153,7 +133,7 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Product Manager, CA, Software Engineer, etc."
                 placeholderTextColor="#aaa"
-                value={data.position}
+                value={data?.position || 'NA'}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -163,7 +143,7 @@ export default function PersonalDetailsScreen() {
                 placeholder="Experience in years"
                 placeholderTextColor="#aaa"
                 keyboardType="numeric"
-                value={data.experience}
+                value={data?.experience || 'NA'}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -172,7 +152,7 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Apple, Google, Microsoft, etc."
                 placeholderTextColor="#aaa"
-                value={data.currentCompany}
+                value={data?.currentCompany || 'NA'}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -181,7 +161,7 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Gurgaon, Mumbai, London, Tokyo, etc."
                 placeholderTextColor="#aaa"
-                value={data.location}
+                value={data?.location || 'NA'}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -192,27 +172,19 @@ export default function PersonalDetailsScreen() {
                 placeholderTextColor="#aaa"
                 maxLength={200}
                 multiline
-                value={data.helpyou}
+                value={data?.helpyou || 'NA'}
               />
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.label}>When is your birthday?</Text>
               <TouchableOpacity
                 style={styles.dateInputContainer}
-                onPress={showDatePicker}
               >
                 <Text style={styles.dateText}>
-                  {date ? date.toDateString() : 'Choose date'}
+                  Choose data and time
                 </Text>
                 <FontAwesome name="calendar" size={24} color="#aaa" />
               </TouchableOpacity>
-              <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="date"
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}
-                maximumDate={new Date()}
-              />
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Email ID</Text>
@@ -221,7 +193,7 @@ export default function PersonalDetailsScreen() {
                 placeholder="Enter your email ID"
                 placeholderTextColor="#aaa"
                 keyboardType="email-address"
-                value={data.email}
+                value={data?.email || 'NA'}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -233,7 +205,7 @@ export default function PersonalDetailsScreen() {
                   placeholder="9876543210"
                   placeholderTextColor="#aaa"
                   keyboardType="phone-pad"
-                  value={data.number}
+                  value={data?.number || 'NA'}
                 />
               </View>
             </View>

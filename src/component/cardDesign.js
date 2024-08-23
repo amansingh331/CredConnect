@@ -57,15 +57,15 @@ const styles = StyleSheet.create({
     width: cardWidth,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: 210,
+    height: 180,
     borderRadius: 10,
     padding: 5,
     paddingBottom: 10,
     alignItems: 'center',
   },
   image: {
-    width: 80,
-    height: 100,
+    width: 70,
+    height: 90,
     borderRadius: 10,
   },
   title: {

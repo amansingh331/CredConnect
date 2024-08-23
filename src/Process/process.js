@@ -73,7 +73,6 @@ const getHomeData = async () => {
 
 const getHomeDetailsData = async (itemId) => {
     try {
-        
         return HomeDetailsData;
     } catch (error) {
         console.error("Failed to get home details data:", error);

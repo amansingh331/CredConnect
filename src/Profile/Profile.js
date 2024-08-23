@@ -35,7 +35,6 @@ export default function Profile() {
     }, [navigation])
   );
 
-  // Render loading indicator if data is still being fetched
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -43,8 +42,6 @@ export default function Profile() {
       </View>
     );
   }
-
-  // Render nothing if data is not yet available (fallback)
   if (!data) {
     return null;
   }
@@ -83,11 +80,11 @@ export default function Profile() {
               <Icon name="call" size={24} color="green" />
               <Text style={styles.buttonText}>{data.callPrice}</Text>
             </Pressable>
-            <Pressable style={styles.actionButton} onPress={() => navigation.navigate('VideoChat')}>
+            <Pressable style={styles.actionButton}>
               <Icon name="videocam" size={24} color="dodgerblue" />
               <Text style={styles.buttonText}>{data.videoPrice}</Text>
             </Pressable>
-            <Pressable style={styles.actionButton} onPress={() => navigation.navigate('chat')}>
+            <Pressable style={styles.actionButton}>
               <Icon name="chatbubble" size={24} color="orange" />
               <Text style={styles.buttonText}>{data.chatPrice}</Text>
             </Pressable>
