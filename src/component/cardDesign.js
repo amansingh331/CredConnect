@@ -4,7 +4,7 @@ import img from '../assets/home.png';
 import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
-const cardWidth = (width - 40 - 20) / 3;
+const cardWidth = (width - 40 - 10) / 3;
 
 const Card = ({ data }) => {
   const navigation = useNavigation();
@@ -48,10 +48,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   cardContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   card: {
     width: cardWidth,

@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
       paddingHorizontal: 0,
-      marginTop:10,
+      // marginTop:10,
   },
   reviewCard: {
       flexDirection: 'row',

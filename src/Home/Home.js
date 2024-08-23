@@ -12,10 +12,6 @@ const App = () => {
   const navigation = useNavigation();
   const [notificationiconColor, setnotificationIconColor] = useState('white');
   const [messageiconColor, setmessageIconColor] = useState('white');
-  const screenWidth = Dimensions.get('window').width;
-  const cardWidth = 160;
-  const spacing = 10;
-  const numColumns = Math.floor(screenWidth / (cardWidth + spacing));
 
   const handleNotification = async (data) => {
     try {

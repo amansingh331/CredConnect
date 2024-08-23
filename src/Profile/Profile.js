@@ -47,7 +47,7 @@ export default function Profile() {
   }
 
   return (
-    <>
+    <View style={styles.maincontainer}>
       <HeaderComponent />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
@@ -113,13 +113,18 @@ export default function Profile() {
               <Icon name="logo-twitter" size={24} color="white" />
             </View>
           </View>
+          
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  maincontainer:{
+    flex: 1,
+    backgroundColor: color.backgroundcolor,
+  },
   scrollContainer: {
     backgroundColor: color.backgroundcolor,
     paddingVertical: 10,
