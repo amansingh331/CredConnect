@@ -2,11 +2,12 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const { width } = Dimensions.get('window'); // Get the screen width
+const { width } = Dimensions.get('window');
+const cardWidth = (width - 40) / 2;
 
 const Card = ({ title, image, description, backgroundColor, rating, location, callPrice, videoPrice, chatPrice }) => {
   return (
-    <View style={[styles.card, { backgroundColor }]}>
+    <View style={[styles.card, { backgroundColor, width: cardWidth }]}>
       <View style={styles.header}>
         <Icon name="star" size={15} color="orange" />
         <Text style={styles.ratingText}>{rating}</Text>
@@ -41,7 +42,6 @@ const Card = ({ title, image, description, backgroundColor, rating, location, ca
 
 const styles = StyleSheet.create({
   card: {
-    width: width * 0.45, 
     padding: 10,
     backgroundColor: '#1a1a1a',
     borderRadius: 15,
@@ -51,22 +51,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 5,
-    marginTop: 15,
-    marginHorizontal:5,
+    margin: 5, 
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
   },
   ratingText: {
     color: 'white',
     marginLeft: 5,
-    fontSize:11,
-  },
-  addIcon: {
-    marginLeft: 'auto',
+    fontSize: 11,
   },
   profileImage: {
     width: 70,

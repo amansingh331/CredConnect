@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
-import { View, Text, Image, ScrollView, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import color from '../Constant/color';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { TextInput } from 'react-native-gesture-handler';
 
-const Notification = ({ route })=>{
+const Message = ({ route }) => {
   const [backiconColor, setbackIconColor] = useState('white');
-  const navigation = useNavigation()
+  const [pressedCards, setPressedCards] = useState([]);
+  const navigation = useNavigation();
+
+  const name = "John Doe";
+  const message = "This is a sample comment.";
+
+  const handlePressIn = (index) => {
+    setPressedCards(prevState => {
+      const newState = [...prevState];
+      newState[index] = true;
+      return newState;
+    });
+  };
+
+  const handlePressOut = (index) => {
+    setPressedCards(prevState => {
+      const newState = [...prevState];
+      newState[index] = false;
+      return newState;
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -17,149 +39,115 @@ const Notification = ({ route })=>{
         >
           <Icon name="chevron-back" size={24} color={backiconColor} />
         </Pressable>
-        <Text style={styles.headerTitle}>Notifictaion</Text>
+        <Text style={styles.headerTitle}>Notification</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              <Text style={styles.message}>comment</Text>
+        {[...Array(15)].map((_, index) => (
+          <Pressable
+            key={index}
+            onPressIn={() => handlePressIn(index)}
+            onPressOut={() => handlePressOut(index)}
+            style={[
+              styles.reviewCard,
+              pressedCards[index] ? styles.pressed : null,
+              { backgroundColor: pressedCards[index] ? '#333333' : '#1e1e1e' },
+            ]}
+          >
+            <View style={styles.reviewCardContent}>
+              <Image 
+                source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} 
+                style={styles.profileImage} 
+              />
+              <View style={styles.reviewTextContainer}>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.message}>{message}</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
-          <View style={styles.reviewCard}>
-            <Image source={{ uri: 'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg' }} style={styles.profileImage} />
-            <View style={styles.reviewTextContainer}>
-              <Text style={styles.name}>name</Text>
-              <Text style={styles.message}>comment</Text>
-            </View>
-          </View>
+          </Pressable>
+        ))}
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: color.backgroundcolor,
+    flex: 1,
+    backgroundColor: color.backgroundcolor,
   },
   header: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      padding: 15,
-      backgroundColor: color.headercolor,
-      elevation: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    backgroundColor: color.headercolor,
+    elevation: 5,
   },
   headerTitle: {
-      color: 'white',
-      fontSize: 17,
-      marginLeft: 10,
+    color: 'white',
+    fontSize: 17,
+    marginLeft: 10,
   },
   scrollContainer: {
-      paddingHorizontal: 0,
-      // marginTop:10,
+    paddingHorizontal: 0,
   },
   reviewCard: {
-      flexDirection: 'row',
-      padding: 15,
-      backgroundColor: '#1e1e1e',
-      borderRighttWidth: 0,
-      borderLeftWidth: 0,
-      borderTopWidth:1,
-      borderColor: '#333333',
+    flexDirection: 'row',
+    padding: 10,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
+    borderTopWidth: 1,
+    borderColor: '#333333',
+    alignItems: 'center',
+  },
+  pressed: {
+    transform: [{ scale: 0.98 }],
+    opacity: 0.9,
+  },
+  reviewCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
   },
   profileImage: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
-      marginRight: 15,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    marginRight: 10,
   },
   reviewTextContainer: {
-      flex: 1,
+    flex: 1,
   },
   name: {
-      color: 'white',
-      fontSize: 16,
-      fontWeight: 'bold',
-  },
-  ratingRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginTop: 3,
-  },
-  daysAgo: {
-      color: 'gray',
-      fontSize: 12,
-      marginLeft: 10,
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
   },
   message: {
-      color: 'gray',
-      fontSize: 10,
+    color: 'gray',
+    fontSize: 12,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    marginBottom: 10,
+  },
+  input: {
+    flex: 1,
+    color: 'white',
+    backgroundColor: '#1F1F1F',
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  sendButton: {
+    marginLeft: 8,
+    padding: 13,
+    backgroundColor: '#1F1F1F',
+    borderRadius: 50,
   },
 });
 
-export default Notification;
+export default Message;
