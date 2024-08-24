@@ -77,7 +77,7 @@ const ProfileCard = ({route}) => {
   }
 
   return (
-    <>
+    <View style={styles.maincontainer}>
       <HeaderComponent />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
@@ -142,11 +142,15 @@ const ProfileCard = ({route}) => {
           </View>
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  maincontainer:{
+    flex: 1,
+    backgroundColor: color.backgroundcolor,
+  },
   scrollContainer: {
     backgroundColor: color.backgroundcolor,
     paddingVertical: 10,
