@@ -21,6 +21,27 @@ import Process from '../../Process/process';
 
 export default function PersonalDetailsScreen() {
   const [image, setImage] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [position, setPosition] = useState('');
+  const [experience, setExperience] = useState('');
+  const [currentCompany, setCurrentCompany] = useState('');
+  const [location, setLocation] = useState('');
+  const [bio, setBio] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [audioPrice, setAudioPrice] = useState('100');
+  const [videoPrice, setVideoPrice] = useState('250');
+  const [chatPrice, setChatPrice] = useState('20');
+  const [data, setdata] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+  const [backiconColor, setbackIconColor] = useState('white');
+  const [isEditingAudio, setIsEditingAudio] = useState(false);
+  const [isEditingVideo, setIsEditingVideo] = useState(false);
+  const [isEditingChat, setIsEditingChat] = useState(false);
+  const [userid, setuserid] = useState(null);
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -33,24 +54,13 @@ export default function PersonalDetailsScreen() {
     }
   };
 
-  const navigation = useNavigation();
-  const [backiconColor, setbackIconColor] = useState('white');
-
-  const [isEditingAudio, setIsEditingAudio] = useState(false);
-  const [isEditingVideo, setIsEditingVideo] = useState(false);
-  const [isEditingChat, setIsEditingChat] = useState(false);
-
-  const [audioPrice, setAudioPrice] = useState('100');
-  const [videoPrice, setVideoPrice] = useState('250');
-  const [chatPrice, setChatPrice] = useState('20');
-
-  const [data, setdata] = useState(null);
-  const [loading, setLoading] = useState(true);
   useFocusEffect(
     useCallback(() => {
       const fetchEditProfileData = async () => {
         try {
-          const EditProfiledata = await Process.getEditProfileData();
+          const useridfe = await Process.getUserId();
+          setuserid(useridfe);
+          const EditProfiledata = await Process.getEditProfileData(useridfe);
           setdata(EditProfiledata);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -63,11 +73,20 @@ export default function PersonalDetailsScreen() {
   );
 
   useEffect(() => {
-    if (data) {
-      setAudioPrice(data.audio);
-      setVideoPrice(data.video);
-      setChatPrice(data.chat);
-      setImage(data.image);
+    if(data) {
+      setFirstName(data.Fname || '');
+      setLastName(data.Lname || '');
+      setPosition(data.Position || '');
+      setExperience(data.Experience?.toString() || '');
+      setCurrentCompany(data.CurrentCompany || '');
+      setLocation(data.Location || '');
+      setBio(data.Bio || '');
+      setEmail(data.Email || '');
+      setMobileNumber(data.MobileNumber || '');
+      setAudioPrice(data.CallPrice || '100');
+      setVideoPrice(data.VideoPrice || '250');
+      setChatPrice(data.ChatPrice || '20');
+      setImage(data.ProfilePic || '');
     }
   }, [data]);
 
@@ -83,8 +102,31 @@ export default function PersonalDetailsScreen() {
     return null;
   }
 
-  const handelUpdate = () => {
-    navigation.goBack();
+  const handelUpdate = async () => {
+
+    const SendData = {
+      userid: useridfe,
+      Fname: firstName,
+      Lname: lastName,
+      Position: position,
+      Experience: experience,
+      CurrentCompany: currentCompany,
+      Location: location,
+      Bio: bio,
+      Email: email,
+      MobileNumber: mobileNumber,
+      CallPrice: audioPrice,
+      VideoPrice: videoPrice,
+      ChatPrice: chatPrice,
+      ProfilePic: image,
+    };
+    const out = await Process.updateEditProfileData(SendData);
+    if(out){
+      console.warn("data updated successfully");
+      navigation.goBack();
+    }else{
+      console.warn("failed to update!");
+    }
   }
 
   return (
@@ -117,13 +159,15 @@ export default function PersonalDetailsScreen() {
                   style={styles.nameInput}
                   placeholder="First Name"
                   placeholderTextColor="#aaa"
-                  value={data?.first_name || 'NA'}
+                  value={firstName}
+                  onChangeText={setFirstName}
                 />
                 <TextInput
                   style={styles.nameInput}
                   placeholder="Last Name"
                   placeholderTextColor="#aaa"
-                  value={data?.last_name || 'NA'}
+                  value={lastName}
+                  onChangeText={setLastName}
                 />
               </View>
             </View>
@@ -133,7 +177,8 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Product Manager, CA, Software Engineer, etc."
                 placeholderTextColor="#aaa"
-                value={data?.position || 'NA'}
+                value={position}
+                onChangeText={setPosition}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -142,8 +187,9 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="Experience in years"
                 placeholderTextColor="#aaa"
-                keyboardType="numeric"
-                value={data?.experience || 'NA'}
+                keyboardType='numeric'
+                value={experience}
+                onChangeText={setExperience}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -152,7 +198,8 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Apple, Google, Microsoft, etc."
                 placeholderTextColor="#aaa"
-                value={data?.currentCompany || 'NA'}
+                value={currentCompany}
+                onChangeText={setCurrentCompany}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -161,7 +208,8 @@ export default function PersonalDetailsScreen() {
                 style={styles.textInput}
                 placeholder="e.g., Gurgaon, Mumbai, London, Tokyo, etc."
                 placeholderTextColor="#aaa"
-                value={data?.location || 'NA'}
+                value={location}
+                onChangeText={setLocation}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -172,7 +220,8 @@ export default function PersonalDetailsScreen() {
                 placeholderTextColor="#aaa"
                 maxLength={200}
                 multiline
-                value={data?.helpyou || 'NA'}
+                value={bio}
+                onChangeText={setBio}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -193,7 +242,8 @@ export default function PersonalDetailsScreen() {
                 placeholder="Enter your email ID"
                 placeholderTextColor="#aaa"
                 keyboardType="email-address"
-                value={data?.email || 'NA'}
+                editable={false}
+                value={email}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -205,7 +255,8 @@ export default function PersonalDetailsScreen() {
                   placeholder="9876543210"
                   placeholderTextColor="#aaa"
                   keyboardType="phone-pad"
-                  value={data?.number || 'NA'}
+                  editable={false}
+                  value={mobileNumber}
                 />
               </View>
             </View>

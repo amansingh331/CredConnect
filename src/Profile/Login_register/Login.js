@@ -20,7 +20,7 @@ export default function LoginForm() {
     navigation.navigate('Forget');
   };
 
-  const LoginCall = () => {
+  const LoginCall = async () => {
     if (username.length < 1) {
       console.warn("Username cannot be empty");
       return;
@@ -35,7 +35,10 @@ export default function LoginForm() {
       role:role,
       rememberMe:click,
     }
-    Process.Login(data);
+    const movePage = await Process.Login(data);
+    if(movePage === 1){
+      navigation.goBack();
+    }
   }
 
 

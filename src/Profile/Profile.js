@@ -9,8 +9,8 @@ import color from '../Constant/color';
 
 export default function Profile() {
   const navigation = useNavigation();
-  const [data, setData] = useState(null); // Initialize as null
-  const [loading, setLoading] = useState(true); // Loading state
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -21,16 +21,15 @@ export default function Profile() {
             navigation.navigate('Login');
             return;
           }
-
-          const tempData = await Process.getUserData();
+          const userid = await Process.getUserId();
+          const tempData = await Process.getUserData(userid);
           setData(tempData);
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
-          setLoading(false); // Stop loading
+          setLoading(false);
         }
       };
-
       checkLoginStatus();
     }, [navigation])
   );
@@ -56,37 +55,40 @@ export default function Profile() {
           </Pressable>
           <View style={styles.profileSection}>
             <Image
-              source={{ uri: data.image }}
+              source={{ uri: data.ProfilePic }}
               style={styles.profileImage}
             />
-            <Text style={styles.name}>{data.first_name + " " + data.last_name}</Text>
-            <Text style={styles.title}>{data.description}</Text>
+            <Text style={styles.name}>{data.Fname + " " + data.Lname}</Text>
+            <Text style={styles.title}>{data.Position}</Text>
             <View style={styles.ratingRow}>
               <Icon name="star" size={16} color="orange" />
-              <Text style={styles.ratingText}>{data.rating}</Text>
+              <Text style={styles.ratingText}>{data.AvgRating}</Text>
               <Text style={{ color: 'white', marginLeft: 12 }}>|</Text>
-              <Text onPress={() => navigation.navigate('Review', { data: data })} style={styles.reviewText}>{data.review.length} reviews</Text>
+              <Text onPress={() => navigation.navigate('Review', { data: data })} style={styles.reviewText}>{data.NoOfReview} reviews</Text>
             </View>
             <View style={styles.locationRow}>
+            <Text style={styles.locationText}>{data.Experience + '+ Years,'}</Text>
+              <Text style={styles.locationText}>{data.CurrentCompany + ' '}</Text>
+              
               <Icon name="location-outline" size={16} color="gray" />
-              <Text style={styles.locationText}>{data.location}</Text>
+              <Text style={styles.locationText}>{data.Location}</Text>
             </View>
             <Text style={styles.description}>
-              {data.bio}
+              {data.Bio}
             </Text>
           </View>
           <View style={styles.actionButtons}>
             <Pressable style={styles.actionButton}>
               <Icon name="call" size={24} color="green" />
-              <Text style={styles.buttonText}>{data.callPrice}</Text>
+              <Text style={styles.buttonText}>{"₹"+ data.CallPrice + "/hr"}</Text>
             </Pressable>
             <Pressable style={styles.actionButton}>
               <Icon name="videocam" size={24} color="dodgerblue" />
-              <Text style={styles.buttonText}>{data.videoPrice}</Text>
+              <Text style={styles.buttonText}>{"₹"+ data.VideoPrice + "/hr"}</Text>
             </Pressable>
             <Pressable style={styles.actionButton}>
               <Icon name="chatbubble" size={24} color="orange" />
-              <Text style={styles.buttonText}>{data.chatPrice}</Text>
+              <Text style={styles.buttonText}>{"₹"+ data.ChatPrice + "/hr"}</Text>
             </Pressable>
           </View>
 
@@ -102,7 +104,16 @@ export default function Profile() {
           <View style={styles.container1}>
             <View style={styles.dateContainer}>
               <Text style={styles.joinedText}>JOINED ON</Text>
-              <Text style={styles.dateText}>Jul, 2024</Text>
+              <Text style={styles.dateText}>
+                {data.DateOfJoined
+                  ? (() => {
+                    const date = new Date(data.DateOfJoined);
+                    const month = date.toLocaleString('en-US', { month: 'short' });
+                    const year = date.toLocaleString('en-US', { year: 'numeric' });
+                    return `${month}, ${year}`;
+                  })()
+                  : ''}
+              </Text>
             </View>
             <View style={styles.divider}></View>
             <View style={styles.iconsContainer1}>

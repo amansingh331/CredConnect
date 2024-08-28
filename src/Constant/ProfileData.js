@@ -1,6 +1,6 @@
 const users = [
     {
-      userId: '1a2b3c',
+      userId: '',
       first_name: 'John',
       last_name: 'Doe',
       position: 'Software Engineer',
@@ -13,19 +13,14 @@ const users = [
       password: 'password123',
       image: 'john.png',
       description: 'Specialist in Cloud Computing',
-      rating: 4.8,
+      avgRating: 4.8,
+      noOfReview: 1,
       location: 'Bangalore',
       callPrice: '₹500/hr',
       chatPrice: '₹250/hr',
       videoPrice: '₹700/hr',
-      review: [
-        {
-          userid: 'abc123',
-          comment: 'Very knowledgeable!',
-          rating: 5,
-          datetime: '2024-01-01',
-        },
-      ],
+      datatime: '',
+      ipaddress:'',
     },
     {
       userId: '4d5e6f',
@@ -46,14 +41,6 @@ const users = [
       callPrice: '₹600/hr',
       chatPrice: '₹300/hr',
       videoPrice: '₹800/hr',
-      review: [
-        {
-          userid: 'def456',
-          comment: 'Insightful and clear explanations.',
-          rating: 5,
-          datetime: '2024-02-15',
-        },
-      ],
     },
     {
       userId: '7g8h9i',
@@ -74,14 +61,6 @@ const users = [
       callPrice: '₹450/hr',
       chatPrice: '₹220/hr',
       videoPrice: '₹650/hr',
-      review: [
-        {
-          userid: 'ghi789',
-          comment: 'Creative and professional.',
-          rating: 4,
-          datetime: '2024-03-10',
-        },
-      ],
     },
     {
       userId: 'j1k2l3',
@@ -102,14 +81,6 @@ const users = [
       callPrice: '₹550/hr',
       chatPrice: '₹275/hr',
       videoPrice: '₹750/hr',
-      review: [
-        {
-          userid: 'jkl012',
-          comment: 'Great strategic insights.',
-          rating: 4.5,
-          datetime: '2024-04-20',
-        },
-      ],
     },
     {
       userId: 'm4n5o6',
@@ -130,14 +101,6 @@ const users = [
       callPrice: '₹400/hr',
       chatPrice: '₹200/hr',
       videoPrice: '₹600/hr',
-      review: [
-        {
-          userid: 'mno345',
-          comment: 'Efficient and detail-oriented.',
-          rating: 4.7,
-          datetime: '2024-05-25',
-        },
-      ],
     },
     {
       userId: 'p7q8r9',
@@ -158,14 +121,6 @@ const users = [
       callPrice: '₹500/hr',
       chatPrice: '₹250/hr',
       videoPrice: '₹700/hr',
-      review: [
-        {
-          userid: 'pqr678',
-          comment: 'Reliable and always available.',
-          rating: 4.8,
-          datetime: '2024-06-15',
-        },
-      ],
     },
     {
       userId: 's1t2u3',
@@ -186,14 +141,6 @@ const users = [
       callPrice: '₹700/hr',
       chatPrice: '₹350/hr',
       videoPrice: '₹900/hr',
-      review: [
-        {
-          userid: 'stu901',
-          comment: 'Cutting-edge knowledge.',
-          rating: 5,
-          datetime: '2024-07-07',
-        },
-      ],
     },
     {
       userId: 'v4w5x6',
@@ -214,14 +161,6 @@ const users = [
       callPrice: '₹550/hr',
       chatPrice: '₹275/hr',
       videoPrice: '₹750/hr',
-      review: [
-        {
-          userid: 'vwx234',
-          comment: 'Highly skilled in security protocols.',
-          rating: 4.5,
-          datetime: '2024-08-12',
-        },
-      ],
     },
     {
       userId: 'y7z8a9',
@@ -242,14 +181,6 @@ const users = [
       callPrice: '₹450/hr',
       chatPrice: '₹225/hr',
       videoPrice: '₹650/hr',
-      review: [
-        {
-          userid: 'yzb567',
-          comment: 'Innovative and forward-thinking.',
-          rating: 4.6,
-          datetime: '2024-09-30',
-        },
-      ],
     },
     {
       userId: 'b1c2d3',
@@ -270,14 +201,6 @@ const users = [
       callPrice: '₹400/hr',
       chatPrice: '₹200/hr',
       videoPrice: '₹600/hr',
-      review: [
-        {
-          userid: 'bcd890',
-          comment: 'User-friendly designs.',
-          rating: 4.7,
-          datetime: '2024-10-05',
-        },
-      ],
     },
   ];
   
