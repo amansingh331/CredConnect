@@ -64,12 +64,11 @@ export default function Profile() {
               <Icon name="star" size={16} color="orange" />
               <Text style={styles.ratingText}>{data.AvgRating}</Text>
               <Text style={{ color: 'white', marginLeft: 12 }}>|</Text>
-              <Text onPress={() => navigation.navigate('Review', { data: data.Fname })} style={styles.reviewText}>{data.NoOfReview} reviews</Text>
+              <Text onPress={() => navigation.navigate('Review', { Fname: data.Fname, userid: data.UserId})} style={styles.reviewText}>{data.NoOfReview} reviews</Text>
             </View>
             <View style={styles.locationRow}>
-            <Text style={styles.locationText}>{data.Experience + '+ Years,'}</Text>
+              <Text style={styles.locationText}>{data.Experience + '+ Years,'}</Text>
               <Text style={styles.locationText}>{data.CurrentCompany + ' '}</Text>
-              
               <Icon name="location-outline" size={16} color="gray" />
               <Text style={styles.locationText}>{data.Location}</Text>
             </View>

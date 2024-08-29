@@ -18,7 +18,7 @@ const CardList = ({ route }) => {
       if (userid === data.userid) {
         navigation.navigate('Profile');
       } else {
-        navigation.navigate('ProfileView', { data: data.userid});
+        navigation.navigate('ProfileView', { data: data.UserId});
       }
     } catch (error) {
       console.error("Something went wrong", error);
@@ -54,32 +54,38 @@ const CardList = ({ route }) => {
   }
 
   return (
-    <>
+    <View style={styles.maincontainer}>
       <HeaderComponent />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           {HomeDetailsData.map((item) => (
-            <TouchableOpacity key={item.userid} onPress={() => handleCardPress(item)}>
+            <TouchableOpacity key={item.UserId} onPress={() => handleCardPress(item)}>
               <Card
-                title={item.first_name + " " + item.last_name}
-                image={item.image}
-                description={item.description}
-                backgroundColor={item.backgroundColor}
-                rating={item.rating}
-                location={item.location}
-                callPrice={item.callPrice}
-                videoPrice={item.videoPrice}
-                chatPrice={item.chatPrice}
+                name={item.Fname + " " + item.Lname}
+                image={item.ProfilePic}
+                description={item.Description || ''}
+                backgroundColor={item.BackgroundColor || '#1a1a1a'}
+                Experience={item.Experience || ''}
+                CurrentCompany={item.CurrentCompany || ''}
+                rating={item.AvgRating || 0}
+                location={item.Location || ''}
+                callPrice={`₹${item.CallPrice || 0}/hr`}
+                videoPrice={`₹${item.VideoPrice || 0}/hr`}
+                chatPrice={`₹${item.ChatPrice || 0}/hr`}
               />
             </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  maincontainer:{
+    flex: 1,
+    backgroundColor: color.backgroundcolor,
+  },
   scrollContainer: {
     paddingHorizontal: 10,
     backgroundColor: color.backgroundcolor,

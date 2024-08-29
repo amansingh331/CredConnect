@@ -52,7 +52,7 @@ const ProfileCard = ({route}) => {
     useCallback(() => {
       const fetchProfileData = async () => {
         try {
-          const Profiledata = await Process.getProfileData(userid);
+          const Profiledata = await Process.getEditProfileData(userid);
           setdata(Profiledata);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -83,37 +83,37 @@ const ProfileCard = ({route}) => {
         <View style={styles.container}>
           <View style={styles.profileSection}>
             <Image
-              source={{ uri: data.image }}
+              source={{ uri: data.ProfilePic }}
               style={styles.profileImage}
             />
-            <Text style={styles.name}>{data.first_name + " " + data.last_name}</Text>
-            <Text style={styles.title}>{data?.description}</Text>
+            <Text style={styles.name}>{data.Fname + " " + data.Lname}</Text>
+            <Text style={styles.title}>{data?.Description || ''}</Text>
             <View style={styles.ratingRow}>
               <Icon name="star" size={16} color="orange" />
-              <Text style={styles.ratingText}>{data?.rating}</Text>
+              <Text style={styles.ratingText}>{data?.AvgRating || 0}</Text>
               <Text style={{color:'white', marginLeft:12}}>|</Text>
-              <Text onPress={() => navigation.navigate('Review', {data:data})} style={styles.reviewText}>{data?.review.length} reviews</Text>
+              <Text onPress={() => navigation.navigate('Review', {Fname:data.Fname, userid:data.UserId})} style={styles.reviewText}>{data?.NoOfReview || 0} reviews</Text>
             </View>
             <View style={styles.locationRow}>
               <Icon name="location-outline" size={16} color="gray" />
-              <Text style={styles.locationText}>{data?.location}</Text>
+              <Text style={styles.locationText}>{data?.Location || ''}</Text>
             </View>
             <Text style={styles.description}>
-              {data?.bio}
+              {data?.bio || ''}
             </Text>
           </View>
           <View style={styles.actionButtons}>
             <Pressable style={styles.actionButton} >
               <Icon name="call" size={24} color="green" onPress={handleAudioChat}/>
-              <Text style={styles.buttonText}>{data?.callPrice}</Text>
+              <Text style={styles.buttonText}>{`₹${data.CallPrice || 0}/hr`}</Text>
             </Pressable>
             <Pressable style={styles.actionButton} onPress={handleVideoChat}>
               <Icon name="videocam" size={24} color="dodgerblue" />
-              <Text style={styles.buttonText}>{data?.videoPrice}</Text>
+              <Text style={styles.buttonText}>{`₹${data.VideoPrice || 0}/hr`}</Text>
             </Pressable>
             <Pressable style={styles.actionButton} onPress={handleMessageChat}>
               <Icon name="chatbubble" size={24} color="orange" />
-              <Text style={styles.buttonText}>{data?.chatPrice}</Text>
+              <Text style={styles.buttonText}>{`₹${data.ChatPrice || 0}/hr`}</Text>
             </Pressable>
           </View>
          

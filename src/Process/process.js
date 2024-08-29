@@ -87,7 +87,6 @@ const getUserData = async (id) => {
             body: JSON.stringify(data),
         });
         const result = await response.json();
-        console.log(result);
         if (response.ok) {
             return result;
         } else {
@@ -101,18 +100,42 @@ const getUserData = async (id) => {
 
 const getHomeData = async () => {
     try {
-        return HomeData;
+        const response = await fetch(`${ip}/Home/Home`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        } else {
+            return [];
+        }
     } catch (error) {
-        console.error("Failed to get home data:", error);
+        console.error("Error fetching home data:", error);
         return [];
     }
 };
 
 const getHomeDetailsData = async (itemId) => {
+    const data = {domainid:itemId};
     try {
-        return HomeDetailsData;
+        const response = await fetch(`${ip}/Home/HomeDetailData`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        } else {
+            return [];
+        }
     } catch (error) {
-        console.error("Failed to get home details data:", error);
+        console.error("Error fetching home data:", error);
         return [];
     }
 };
@@ -127,8 +150,6 @@ const getProfileData = async (data) => {
 };
 
 const getEditProfileData = async (id) => {
-    // const data = {userid:'121', image:'https://i.pinimg.com/736x/64/ea/83/64ea839f6dfab121afcca10e486a94b7.jpg',first_name:'aman', last_name:'singh', position:'sde', experience:'10', currentCompany:'google', location:'patna', helpyou:'how i help other', birthday:'Thu Aug 22 2024', email:'amansingh@gmail.com', number:'9931495681', audio:'100', video:'250', chat:'20'};
-    console.log(id);
     const data = {userid:id};
     try {
         const response = await fetch(`${ip}/userAuth/userinfo`, {
@@ -139,7 +160,6 @@ const getEditProfileData = async (id) => {
             body: JSON.stringify(data),
         });
         const result = await response.json();
-        console.log(result);
         if (response.ok) {
             return result;
         } else {
@@ -160,7 +180,6 @@ const updateEditProfileData = async (data) => {
             body: JSON.stringify(data),
         });
         const result = await response.json();
-        console.log(result);
         if (result.status===1) {
             return true;
         } else {

@@ -18,14 +18,14 @@ const Card = ({ data }) => {
       {data.map((item, index) => (
         <TouchableOpacity 
           key={index} 
-          onPress={() => handleCardPress(item.id)}
+          onPress={() => handleCardPress(item.DomainId)}
           style={[styles.cardContainer, { marginRight: (index + 1) % 3 === 0 ? 0 : 10 }]} 
         >
           <CardDesign
-            title={item.title}
-            image={item.image}
-            description={item.description}
-            backgroundColor={item.backgroundColor}
+            title={item.DomainName}
+            image={item.DomainProfilePic}
+            description={item.DomainDescription}
+            backgroundColor={item.DomainBackgroundColor}
           />
         </TouchableOpacity>
       ))}

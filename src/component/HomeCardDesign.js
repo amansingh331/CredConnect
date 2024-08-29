@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 40) / 2;
 
-const Card = ({ title, image, description, backgroundColor, rating, location, callPrice, videoPrice, chatPrice }) => {
+const Card = ({ name, image, description, Experience, CurrentCompany, backgroundColor, rating, location, callPrice, videoPrice, chatPrice }) => {
   return (
     <View style={[styles.card, { backgroundColor, width: cardWidth }]}>
       <View style={styles.header}>
@@ -16,8 +16,12 @@ const Card = ({ title, image, description, backgroundColor, rating, location, ca
         source={{ uri: image }} 
         style={styles.profileImage}
       />
-      <Text style={styles.name}>{title}</Text>
+      <Text style={styles.name}>{name}</Text>
       <Text style={styles.subtitle}>{description}</Text>
+      <View style={styles.companyNameContainer}>
+        <Text style={styles.locationText}>{Experience + '+ Years,'}</Text>
+        <Text style={styles.locationText}>{CurrentCompany + ' '}</Text>
+      </View>
       <View style={styles.locationContainer}>
         <Icon name="location-outline" size={16} color="gray" />
         <Text style={styles.locationText}>{location}</Text>
@@ -80,6 +84,11 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 11,
     textAlign: 'center',
+    marginBottom: 5,
+  },
+  companyNameContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 5,
   },
   locationContainer: {

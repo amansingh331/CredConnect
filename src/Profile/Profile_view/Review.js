@@ -7,6 +7,8 @@ import Process from '../../Process/process';
 import moment from 'moment';
 
 const ReviewScreen = ({ route }) => {
+    const userid = route.params.userid;
+    const first_name = route.params.Fname;
     const navigation = useNavigation();
     const [reviews, setReviews] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -17,7 +19,6 @@ const ReviewScreen = ({ route }) => {
         React.useCallback(() => {
             const checkLoginStatus = async () => {
                 try {
-                    const userid = await Process.getUserId();
                     const tempData = await Process.getReviewData(userid);
                     const sortedReviews = tempData.sort((a, b) => new Date(b.DateTime) - new Date(a.DateTime));
                     setReviews(sortedReviews);
@@ -41,7 +42,7 @@ const ReviewScreen = ({ route }) => {
     if (!reviews) {
         return null;
     }
-    const first_name = route.params.data;
+    
 
     const filteredReviews = reviews.filter(review => {
         if (selectedFilter === 'Recent') return true;
