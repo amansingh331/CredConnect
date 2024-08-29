@@ -1,23 +1,58 @@
 import React, { useState } from 'react';
-import { View, Text, Image, ScrollView, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, Pressable, StyleSheet, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
+import Process from '../../Process/process';
+import moment from 'moment';
 
-
-const ReviewScreen = ({route}) => {
-    const reviews = route.params.data.review;
-    const first_name = route.params.data.first_name;
+const ReviewScreen = ({ route }) => {
+    const navigation = useNavigation();
+    const [reviews, setReviews] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [backiconColor, setbackIconColor] = useState('white');
     const [selectedFilter, setSelectedFilter] = useState('Recent');
-    const navigation = useNavigation();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            const checkLoginStatus = async () => {
+                try {
+                    const userid = await Process.getUserId();
+                    const tempData = await Process.getReviewData(userid);
+                    const sortedReviews = tempData.sort((a, b) => new Date(b.DateTime) - new Date(a.DateTime));
+                    setReviews(sortedReviews);
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            checkLoginStatus();
+        }, [navigation])
+    );
+
+    if (loading) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={color.Buttoncolor} />
+            </View>
+        );
+    }
+    if (!reviews) {
+        return null;
+    }
+    const first_name = route.params.data;
 
     const filteredReviews = reviews.filter(review => {
         if (selectedFilter === 'Recent') return true;
-        if (selectedFilter === '5 star') return review.rating === 5;
-        if (selectedFilter === '4 star') return review.rating === 4;
-        if (selectedFilter === '3 stars and below') return review.rating <= 3;
+        if (selectedFilter === '5 star') return Math.floor(review.Rating) === 5;
+        if (selectedFilter === '4 star') return Math.floor(review.Rating) === 4;
+        if (selectedFilter === '3 stars and below') return Math.floor(review.Rating) <= 3;
     });
+
+    const calculateDaysAgo = (dateTime) => {
+        return moment(dateTime).fromNow();
+    };
 
     return (
         <View style={styles.container}>
@@ -36,25 +71,25 @@ const ReviewScreen = ({route}) => {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={styles.filterRow}>
-                    <Pressable 
+                    <Pressable
                         style={[styles.filterButton, selectedFilter === 'Recent' && styles.activeFilter]}
                         onPress={() => setSelectedFilter('Recent')}
                     >
                         <Text style={styles.filterText}>Recent</Text>
                     </Pressable>
-                    <Pressable 
+                    <Pressable
                         style={[styles.filterButton, selectedFilter === '5 star' && styles.activeFilter]}
                         onPress={() => setSelectedFilter('5 star')}
                     >
                         <Text style={styles.filterText}>5 star</Text>
                     </Pressable>
-                    <Pressable 
+                    <Pressable
                         style={[styles.filterButton, selectedFilter === '4 star' && styles.activeFilter]}
                         onPress={() => setSelectedFilter('4 star')}
                     >
                         <Text style={styles.filterText}>4 star</Text>
                     </Pressable>
-                    <Pressable 
+                    <Pressable
                         style={[styles.filterButton, selectedFilter === '3 stars and below' && styles.activeFilter]}
                         onPress={() => setSelectedFilter('3 stars and below')}
                     >
@@ -64,18 +99,18 @@ const ReviewScreen = ({route}) => {
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
-                {filteredReviews.map(review => (
-                    <View key={review.id} style={styles.reviewCard}>
-                        <Image source={{ uri: review.image }} style={styles.profileImage} />
+                {filteredReviews.map((review, index) => (
+                    <View key={index} style={styles.reviewCard}>
+                        <Image source={{ uri: review.ProfilePic }} style={styles.profileImage} />
                         <View style={styles.reviewTextContainer}>
-                            <Text style={styles.name}>{review.name}</Text>
+                            <Text style={styles.name}>{`${review.Fname} ${review.Lname}`}</Text>
                             <View style={styles.ratingRow}>
-                                {Array.from({ length: review.rating }).map((_, index) => (
+                                {Array.from({ length: Math.floor(review.Rating) }).map((_, index) => (
                                     <Icon key={index} name="star" size={14} color="orange" />
                                 ))}
-                                <Text style={styles.daysAgo}>{review.daysAgo}</Text>
+                                <Text style={styles.daysAgo}>{calculateDaysAgo(review.DateTime)}</Text>
                             </View>
-                            <Text style={styles.reviewGivenFor}>{review.comment}</Text>
+                            <Text style={styles.reviewGivenFor}>{review.ReviewMsg}</Text>
                         </View>
                     </View>
                 ))}
@@ -104,27 +139,27 @@ const styles = StyleSheet.create({
     filterContainer: {
         paddingVertical: 10,
         backgroundColor: color.backgroundColor,
-        marginBottom:10
-      },
-      filterRow: {
+        marginBottom: 10
+    },
+    filterRow: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,
-      },
-      filterButton: {
+    },
+    filterButton: {
         paddingVertical: 6,
         paddingHorizontal: 12,
         borderRadius: 20,
         backgroundColor: '#333',
         marginRight: 10,
-      },
-      activeFilter: {
+    },
+    activeFilter: {
         backgroundColor: color.Buttoncolor,
-      },
-      filterText: {
+    },
+    filterText: {
         color: 'white',
         fontSize: 14,
-      },
+    },
     scrollContainer: {
         paddingHorizontal: 15,
     },
@@ -163,6 +198,12 @@ const styles = StyleSheet.create({
         color: 'gray',
         fontSize: 12,
         marginTop: 5,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: color.backgroundcolor,
     },
 });
 

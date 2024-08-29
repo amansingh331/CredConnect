@@ -170,5 +170,25 @@ const updateEditProfileData = async (data) => {
         return false;
     }
 }
+const getReviewData = async (id) => {
+    const data = {userid:id};
+    try {
+        const response = await fetch(`${ip}/UserReview/UserReview`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+            return result;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return false;
+    }
+}
 
-export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData, getEditProfileData, updateEditProfileData };
+export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData, getEditProfileData, updateEditProfileData, getReviewData};
