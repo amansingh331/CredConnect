@@ -20,6 +20,7 @@ import Process from '../../Process/process';
 
 
 export default function PersonalDetailsScreen() {
+  const navigation = useNavigation();
   const [image, setImage] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -35,7 +36,6 @@ export default function PersonalDetailsScreen() {
   const [chatPrice, setChatPrice] = useState('20');
   const [data, setdata] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigation();
   const [backiconColor, setbackIconColor] = useState('white');
   const [isEditingAudio, setIsEditingAudio] = useState(false);
   const [isEditingVideo, setIsEditingVideo] = useState(false);
@@ -105,7 +105,7 @@ export default function PersonalDetailsScreen() {
   const handelUpdate = async () => {
 
     const SendData = {
-      userid: useridfe,
+      userid: userid,
       Fname: firstName,
       Lname: lastName,
       Position: position,

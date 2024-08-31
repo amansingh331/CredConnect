@@ -1,13 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeDetailsData from '../Constant/HomeDetailsData';
-import HomeData from '../Constant/HomeData';
 
 const ip = 'http://192.168.0.101:3001';
 
 const Login = async (data) => {
     const checkdata = {Email:data.user, Password:data.pass, Role:data.role};
     try {
-        const response = await fetch(`${ip}/userAuth/Login`, {
+        const response = await fetch(`${ip}/UserAuth/Login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +32,7 @@ const Login = async (data) => {
 const Register = async (data) => {
     const data1 = {Fname: data.FName, Lname: data.LName, Email: data.Email, MobileNumber: data.MobileNumber, Password: data.Password, Role:data.Role, IpAddress:'121.121.1.1'};
     try {
-        const response = await fetch(`${ip}/userAuth/Register`, {
+        const response = await fetch(`${ip}/UserAuth/Register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,9 +65,9 @@ const checkUser = async () => {
 };
 const getUserId = async () => {
     try {
-        const storedUserId = await AsyncStorage.getItem('userId');
-        return 2; 
-        return storedUserId ? parseInt(storedUserId, 10) : 1;
+        const storedUserId = await AsyncStorage.getItem('userid');
+        const t = storedUserId ? parseInt(storedUserId, 10) : 0;
+        return t;
     } catch (error) {
         console.error("Failed to get user ID:", error);
         return 1;
@@ -79,7 +78,7 @@ const getUserId = async () => {
 const getUserData = async (id) => {
     const data = {userid:id};
     try {
-        const response = await fetch(`${ip}/userAuth/UserInfo`, {
+        const response = await fetch(`${ip}/UserAuth/UserInfo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -152,7 +151,7 @@ const getProfileData = async (data) => {
 const getEditProfileData = async (id) => {
     const data = {userid:id};
     try {
-        const response = await fetch(`${ip}/userAuth/userinfo`, {
+        const response = await fetch(`${ip}/UserAuth/userinfo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -172,7 +171,7 @@ const getEditProfileData = async (id) => {
 }
 const updateEditProfileData = async (data) => {
     try {
-        const response = await fetch(`${ip}/userAuth/UpdateUserInfo`, {
+        const response = await fetch(`${ip}/UserAuth/UpdateUserInfo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
