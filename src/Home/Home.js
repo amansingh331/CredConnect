@@ -151,7 +151,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     fontFamily: '',
-  }
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.backgroundcolor,
+  },
 });
 
 export default App;

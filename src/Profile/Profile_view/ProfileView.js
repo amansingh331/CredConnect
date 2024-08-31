@@ -87,7 +87,7 @@ const ProfileCard = ({route}) => {
               style={styles.profileImage}
             />
             <Text style={styles.name}>{data.Fname + " " + data.Lname}</Text>
-            <Text style={styles.title}>{data?.Description || ''}</Text>
+            <Text style={styles.title}>{data?.Position || ''}</Text>
             <View style={styles.ratingRow}>
               <Icon name="star" size={16} color="orange" />
               <Text style={styles.ratingText}>{data?.AvgRating || 0}</Text>
@@ -95,11 +95,13 @@ const ProfileCard = ({route}) => {
               <Text onPress={() => navigation.navigate('Review', {Fname:data.Fname, userid:data.UserId})} style={styles.reviewText}>{data?.NoOfReview || 0} reviews</Text>
             </View>
             <View style={styles.locationRow}>
+              <Text style={styles.locationText}>{data.Experience + '+ Years,'}</Text>
+              <Text style={styles.locationText}>{data.CurrentCompany + ' '}</Text>
               <Icon name="location-outline" size={16} color="gray" />
-              <Text style={styles.locationText}>{data?.Location || ''}</Text>
+              <Text style={styles.locationText}>{data.Location}</Text>
             </View>
             <Text style={styles.description}>
-              {data?.bio || ''}
+              {data?.Bio || ''}
             </Text>
           </View>
           <View style={styles.actionButtons}>

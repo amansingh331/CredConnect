@@ -170,6 +170,7 @@ const getEditProfileData = async (id) => {
     }
 }
 const updateEditProfileData = async (data) => {
+    console.log(data)
     try {
         const response = await fetch(`${ip}/UserAuth/UpdateUserInfo`, {
             method: 'POST',

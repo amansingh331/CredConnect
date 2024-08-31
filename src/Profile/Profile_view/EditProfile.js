@@ -16,8 +16,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
 import * as ImagePicker from 'expo-image-picker';
 import Process from '../../Process/process';
-
-
+import DomainPicker from '../../component/domainPicker'
 
 export default function PersonalDetailsScreen() {
   const navigation = useNavigation();
@@ -41,6 +40,9 @@ export default function PersonalDetailsScreen() {
   const [isEditingVideo, setIsEditingVideo] = useState(false);
   const [isEditingChat, setIsEditingChat] = useState(false);
   const [userid, setuserid] = useState(null);
+  const [DomainData, setDomainData] = useState('');
+  const [selectedDomain, setSelectedDomain] = useState(null);
+
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -74,6 +76,7 @@ export default function PersonalDetailsScreen() {
 
   useEffect(() => {
     if(data) {
+      console.log(data);
       setFirstName(data.Fname || '');
       setLastName(data.Lname || '');
       setPosition(data.Position || '');
@@ -87,6 +90,7 @@ export default function PersonalDetailsScreen() {
       setVideoPrice(data.VideoPrice || '250');
       setChatPrice(data.ChatPrice || '20');
       setImage(data.ProfilePic || '');
+      setDomainData(data.Domain);
     }
   }, [data]);
 
@@ -119,6 +123,7 @@ export default function PersonalDetailsScreen() {
       VideoPrice: videoPrice,
       ChatPrice: chatPrice,
       ProfilePic: image,
+      DomainId:selectedDomain,
     };
     const out = await Process.updateEditProfileData(SendData);
     if(out){
@@ -180,6 +185,13 @@ export default function PersonalDetailsScreen() {
                 value={position}
                 onChangeText={setPosition}
               />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={styles.label}>Select Your Domain?</Text>
+              <DomainPicker domain={DomainData} onSelect={(domainId)=>{
+                setSelectedDomain(domainId);
+                console.log(selectedDomain)
+              }} />
             </View>
             <View style={styles.inputContainer}>
               <Text style={styles.label}>What is your total work experience?</Text>
@@ -518,6 +530,23 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#1E1E1E',
+    borderRadius: 5,
+    backgroundColor:'#1E1E1E',
+  },
+  picker: {
+    height: 50,
+    color: 'white',
+    backgroundColor:'#1E1E1E',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.backgroundcolor,
   },
 });
 
