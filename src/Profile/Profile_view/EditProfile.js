@@ -76,7 +76,6 @@ export default function PersonalDetailsScreen() {
 
   useEffect(() => {
     if(data) {
-      console.log(data);
       setFirstName(data.Fname || '');
       setLastName(data.Lname || '');
       setPosition(data.Position || '');
@@ -190,7 +189,6 @@ export default function PersonalDetailsScreen() {
               <Text style={styles.label}>Select Your Domain?</Text>
               <DomainPicker domain={DomainData} onSelect={(domainId)=>{
                 setSelectedDomain(domainId);
-                console.log(selectedDomain)
               }} />
             </View>
             <View style={styles.inputContainer}>
