@@ -63,7 +63,7 @@ const CardList = ({ route }) => {
               <Card
                 name={item.Fname + " " + item.Lname}
                 image={item.ProfilePic}
-                description={item.Description || ''}
+                description={item.Position || ''}
                 backgroundColor={item.BackgroundColor || '#1a1a1a'}
                 Experience={item.Experience || ''}
                 CurrentCompany={item.CurrentCompany || ''}
