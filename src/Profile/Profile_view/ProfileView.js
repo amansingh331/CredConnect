@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { View, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, Image, Text, Pressable} from 'react-native';
+import { View, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, Image, Text, Pressable, Linking, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HeaderComponent from '../../component/Header/HeaderComponent';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -9,6 +9,12 @@ import Process from '../../Process/process'
 const ProfileCard = ({route}) => {
   const navigation = useNavigation();
   const userid = route.params.data;
+  const datalinkedin = 1;
+  const openURLInBrowser = (url) => {
+    Linking.openURL(url).catch((err) =>
+      Alert.alert("Error", "Unable to open the URL")
+    );
+  };
 
   const handleVideoChat = async (data) => {
     try {
@@ -135,11 +141,41 @@ const ProfileCard = ({route}) => {
             </View>
             <View style={styles.divider}></View>
             <View style={styles.iconsContainer1}>
-              <Icon name="logo-linkedin" size={24} color="white" />
-              <Icon name="logo-instagram" size={24} color="white" />
-              <Icon name="logo-youtube" size={24} color="white" />
-              <Icon name="logo-facebook" size={24} color="white" />
-              <Icon name="logo-twitter" size={24} color="white" />
+              {data.Linkedin ? (
+                <Pressable onPress={() => openURLInBrowser(data.Linkedin)}>
+                  <Icon name="logo-linkedin" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-linkedin" size={24} color="gray" />
+              )}
+              {data.Instagram ? (
+                <Pressable onPress={() => openURLInBrowser(data.Instagram)}>
+                  <Icon name="logo-instagram" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-instagram" size={24} color="gray" />
+              )}
+              {data.Youtube ? (
+                <Pressable onPress={() => openURLInBrowser(data.Youtube)}>
+                  <Icon name="logo-youtube" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-youtube" size={24} color="gray" />
+              )}
+              {data.Facebook ? (
+                <Pressable onPress={() => openURLInBrowser(data.Facebook)}>
+                  <Icon name="logo-facebook" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-facebook" size={24} color="gray" />
+              )}
+              {data.Twitter ? (
+                <Pressable onPress={() => openURLInBrowser(data.Twitter)}>
+                  <Icon name="logo-twitter" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-twitter" size={24} color="gray" />
+              )}
             </View>
           </View>
         </View>
