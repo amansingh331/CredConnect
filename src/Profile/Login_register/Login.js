@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View, StatusBar, ScrollView } from 'react-native';
+import {Alert, ActivityIndicator, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View, StatusBar, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Color from '../../../src/Constant/color'
@@ -12,6 +12,7 @@ export default function LoginForm() {
   const [role, setrole] = useState(1);
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const handleSignup = () => {
     navigation.navigate('Register');
@@ -29,6 +30,7 @@ export default function LoginForm() {
       console.warn("Password cannot be empty");
       return;
     }
+    setLoading(true);
     const data = {
       user:username,
       pass:password,
@@ -36,11 +38,17 @@ export default function LoginForm() {
       rememberMe:click,
     }
     const movePage = await Process.Login(data);
+    setLoading(false); 
     if(movePage === 1){
-      navigation.goBack();
+      navigation.navigate('Profile');
+    }else{
+      Alert.alert(
+        'Login Failed',
+        'Wrong username or password.',
+        [{ text: 'OK' }]
+      );
     }
   }
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -106,8 +114,14 @@ export default function LoginForm() {
             ]}
             onPressIn={() => setIsPressed(true)}
             onPressOut={() => setIsPressed(false)}
-            onPress={LoginCall}>
-            <Text style={styles.buttonText}>Log In</Text>
+            onPress={LoginCall}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text style={styles.buttonText}>Log In</Text>
+            )}
           </Pressable>
           <Text style={styles.optionsText}>OR LOGIN WITH</Text>
         </View>

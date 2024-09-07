@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeDetailsData from '../Constant/HomeDetailsData';
 
-// const ip = 'http://192.168.0.101:3001';
+// const ip = 'http://192.168.0.102:3000';
 const ip = 'https://credconnect-backend.azurewebsites.net';
 
 const Login = async (data) => {
@@ -15,14 +15,15 @@ const Login = async (data) => {
             body: JSON.stringify(checkdata),
         });
         const result = await response.json();
-        if (response.ok) {
+        if (response.status === 1) {
             await AsyncStorage.setItem('Email', data.user);
             await AsyncStorage.setItem('Password', data.pass);
             await AsyncStorage.setItem('userid', JSON.stringify(result.data.userid));
-            console.warn(result.message);
             return 1;
         } else {
-            console.warn(result.message);
+            if(response.status===2){
+                return 2;
+            }
             return 0;
         }
     } catch (error) {
@@ -44,8 +45,10 @@ const Register = async (data) => {
 
         if (response.ok) {
             console.warn(result.message);
+            return 1;
         } else {
             console.warn(result.message);
+            return 0;
         }
     } catch (error) {
         console.error("Error during registration:", error);

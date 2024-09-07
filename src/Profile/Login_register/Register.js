@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Button, Image, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View, StatusBar, ScrollView} from 'react-native';
+import { Alert, ActivityIndicator, Button, Image, Pressable, SafeAreaView, StyleSheet, Switch, Text, TextInput, View, StatusBar, ScrollView} from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 const logo = require("../../assets/logo.png");
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -16,9 +16,7 @@ export default function LoginForm() {
   const [click, setClick] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const navigation = useNavigation();
-
-
-  // Alert.alert("Login Successfully!", "See you on my Instagram if you have questions: must_ait6")}
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = () => {
     navigation.navigate('Login');
@@ -30,7 +28,7 @@ export default function LoginForm() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  const registerCall = () => {
+  const registerCall = async () => {
     if(fname.length < 1){
       console.warn("enter first name");
       return ;
@@ -55,6 +53,7 @@ export default function LoginForm() {
       console.warn("accept the term & condition");
       return ;
     }
+    setLoading(true);
     const registerData = {
       FName: fname, 
       LName: lname, 
@@ -63,7 +62,25 @@ export default function LoginForm() {
       Password:password,
       Role:role,
     }
-    Process.Register(registerData);
+    const res = await Process.Register(registerData);
+    setLoading(false); 
+    if(res === 1){
+      navigation.navigate('Login');
+    }else{
+      if(res === 2){
+        Alert.alert(
+          'Register Failed',
+          'User already exists!',
+          [{ text: 'OK' }]
+        );
+      }else{
+        Alert.alert(
+          'Register Failed',
+          'Something went wrong, Try Again!',
+          [{ text: 'OK' }]
+        );
+      }
+    }
   }
 
   return (
@@ -156,8 +173,14 @@ export default function LoginForm() {
           ]}
           onPressIn={() => setIsPressed(true)}
           onPressOut={() => setIsPressed(false)}
-          onPress={registerCall}>
-          <Text style={styles.buttonText}>Register</Text>
+          onPress={registerCall}
+          disabled={loading}
+        >
+          {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text style={styles.buttonText}>Register</Text>
+            )}
         </Pressable>
         <Text style={styles.optionsText}>OR LOGIN WITH</Text>
       </View>
