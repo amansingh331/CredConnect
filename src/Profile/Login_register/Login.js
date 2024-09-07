@@ -12,7 +12,7 @@ export default function LoginForm() {
   const [role, setrole] = useState(1);
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   const handleSignup = () => {
     navigation.navigate('Register');

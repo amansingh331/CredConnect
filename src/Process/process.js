@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeDetailsData from '../Constant/HomeDetailsData';
 
-// const ip = 'http://192.168.0.102:3000';
-const ip = 'https://credconnect-backend.azurewebsites.net';
+const ip = 'http://192.168.0.102:3000';
+// const ip = 'https://credconnect-backend.azurewebsites.net';
 
 const Login = async (data) => {
     const checkdata = {Email:data.user, Password:data.pass, Role:data.role};
@@ -15,15 +15,13 @@ const Login = async (data) => {
             body: JSON.stringify(checkdata),
         });
         const result = await response.json();
-        if (response.status === 1) {
+        console.log(result)
+        if (result.status === 1) {
             await AsyncStorage.setItem('Email', data.user);
             await AsyncStorage.setItem('Password', data.pass);
             await AsyncStorage.setItem('userid', JSON.stringify(result.data.userid));
             return 1;
         } else {
-            if(response.status===2){
-                return 2;
-            }
             return 0;
         }
     } catch (error) {
@@ -42,14 +40,7 @@ const Register = async (data) => {
             body: JSON.stringify(data1),
         });
         const result = await response.json();
-
-        if (response.ok) {
-            console.warn(result.message);
-            return 1;
-        } else {
-            console.warn(result.message);
-            return 0;
-        }
+        return result.status;
     } catch (error) {
         console.error("Error during registration:", error);
     }
@@ -63,7 +54,6 @@ const checkUser = async () => {
         const storedPassword = await AsyncStorage.getItem('Password');
         return storedEmail !== null && storedPassword !== null;
     } catch (error) {
-        console.error("Failed to check user:", error);
         return false;
     }
 };
@@ -73,7 +63,6 @@ const getUserId = async () => {
         const t = storedUserId ? parseInt(storedUserId, 10) : 0;
         return t;
     } catch (error) {
-        console.error("Failed to get user ID:", error);
         return 1;
     }
 };
