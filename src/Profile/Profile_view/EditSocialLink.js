@@ -100,7 +100,7 @@ export default function PersonalDetailsScreen() {
         >
           <Icon name="chevron-back" size={24} color={backiconColor} />
         </Pressable>
-        <Text style={styles.headerTitle}>Edit Your Details</Text>
+        <Text style={styles.headerTitle}>Edit Social Link</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.childcontainer}>

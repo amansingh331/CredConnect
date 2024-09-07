@@ -316,6 +316,7 @@ const styles = StyleSheet.create({
   footerText: {
     textAlign: 'center',
     color: 'gray',
+    marginBottom:20
   },
   signup: {
     color: Color.Buttoncolor,
