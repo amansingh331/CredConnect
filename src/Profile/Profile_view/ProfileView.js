@@ -5,11 +5,16 @@ import HeaderComponent from '../../component/Header/HeaderComponent';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
 import Process from '../../Process/process'
+import OptionModal from '../../component/bookModel';
 
 const ProfileCard = ({route}) => {
   const navigation = useNavigation();
   const userid = route.params.data;
-  const datalinkedin = 1;
+  const [data, setdata] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   const openURLInBrowser = (url) => {
     Linking.openURL(url).catch((err) =>
       Alert.alert("Error", "Unable to open the URL")
@@ -52,8 +57,7 @@ const ProfileCard = ({route}) => {
       console.error("Something went wrong", error);
     }
   };
-  const [data, setdata] = useState(null);
-  const [loading, setLoading] = useState(true);
+  
   useFocusEffect(
     useCallback(() => {
       const fetchProfileData = async () => {
@@ -111,8 +115,8 @@ const ProfileCard = ({route}) => {
             </Text>
           </View>
           <View style={styles.actionButtons}>
-            <Pressable style={styles.actionButton} >
-              <Icon name="call" size={24} color="green" onPress={handleAudioChat}/>
+            <Pressable style={styles.actionButton} onPress={handleAudioChat}>
+              <Icon name="call" size={24} color="green" />
               <Text style={styles.buttonText}>{`₹${data.CallPrice || 0}/hr`}</Text>
             </Pressable>
             <Pressable style={styles.actionButton} onPress={handleVideoChat}>
@@ -130,7 +134,7 @@ const ProfileCard = ({route}) => {
               <Text style={styles.availabilityText}>Available at</Text>
               <Text style={styles.timeText}>1:00 PM - Today</Text>
             </View>
-            <Pressable style={styles.bookButton}>
+            <Pressable style={styles.bookButton} onPress={() => setModalVisible(true)}>
               <Text style={styles.bookButtonText}>Book now</Text>
             </Pressable>
           </View>
@@ -178,6 +182,7 @@ const ProfileCard = ({route}) => {
               )}
             </View>
           </View>
+          <OptionModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>
       </ScrollView>
     </View>

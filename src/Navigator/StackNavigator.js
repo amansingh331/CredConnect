@@ -14,6 +14,7 @@ import EditProfile from '../Profile/Profile_view/EditProfile';
 import ProfileView from '../Profile/Profile_view/ProfileView';
 import Review from '../Profile/Profile_view/Review';
 import EditSocialLink from '../Profile/Profile_view/EditSocialLink';
+import BookModel from '../component/bookModel';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ const StackNavigator = () => (
     <Stack.Screen name="ProfileView" component={ProfileView} options={{ headerShown: false }}/>
     <Stack.Screen name="Review" component={Review} options={{ headerShown: false }}/>
     <Stack.Screen name="EditSocialLink" component={EditSocialLink} options={{ headerShown: false }}/>
+    <Stack.Screen name="BookModel" component={BookModel} options={{ headerShown: false }}/>
   </Stack.Navigator>
 );
 

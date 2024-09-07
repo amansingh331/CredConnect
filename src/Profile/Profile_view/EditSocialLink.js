@@ -7,16 +7,12 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
-  Image,
   ActivityIndicator,
 } from 'react-native';
-import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import color from '../../Constant/color';
-import * as ImagePicker from 'expo-image-picker';
 import Process from '../../Process/process';
-import DomainPicker from '../../component/domainPicker'
 
 export default function PersonalDetailsScreen() {
   const navigation = useNavigation();

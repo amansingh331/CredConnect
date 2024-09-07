@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 20,
-    fontFamily: '',
+    fontFamily: 'PlaywriteCU-Regular',
   },
   loadingContainer: {
     flex: 1,
