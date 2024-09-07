@@ -100,30 +100,52 @@ export default function Profile() {
               <Text style={styles.bookButtonText}>Book now</Text>
             </Pressable>
           </View>
+          <Pressable onPress={() => navigation.navigate('EditSocialLink')}>
           <View style={styles.container1}>
             <View style={styles.dateContainer}>
               <Text style={styles.joinedText}>JOINED ON</Text>
-              <Text style={styles.dateText}>
-                {data.DateOfJoined
-                  ? (() => {
-                    const date = new Date(data.DateOfJoined);
-                    const month = date.toLocaleString('en-US', { month: 'short' });
-                    const year = date.toLocaleString('en-US', { year: 'numeric' });
-                    return `${month}, ${year}`;
-                  })()
-                  : ''}
-              </Text>
+              <Text style={styles.dateText}>Jul, 2024</Text>
             </View>
             <View style={styles.divider}></View>
             <View style={styles.iconsContainer1}>
-              <Icon name="logo-linkedin" size={24} color="white" />
-              <Icon name="logo-instagram" size={24} color="white" />
-              <Icon name="logo-youtube" size={24} color="white" />
-              <Icon name="logo-facebook" size={24} color="white" />
-              <Icon name="logo-twitter" size={24} color="white" />
+              {data.Linkedin ? (
+                <Pressable onPress={() => openURLInBrowser(data.Linkedin)}>
+                  <Icon name="logo-linkedin" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-linkedin" size={24} color="gray" />
+              )}
+              {data.Instagram ? (
+                <Pressable onPress={() => openURLInBrowser(data.Instagram)}>
+                  <Icon name="logo-instagram" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-instagram" size={24} color="gray" />
+              )}
+              {data.Youtube ? (
+                <Pressable onPress={() => openURLInBrowser(data.Youtube)}>
+                  <Icon name="logo-youtube" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-youtube" size={24} color="gray" />
+              )}
+              {data.Facebook ? (
+                <Pressable onPress={() => openURLInBrowser(data.Facebook)}>
+                  <Icon name="logo-facebook" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-facebook" size={24} color="gray" />
+              )}
+              {data.Twitter ? (
+                <Pressable onPress={() => openURLInBrowser(data.Twitter)}>
+                  <Icon name="logo-twitter" size={24} color="white" />
+                </Pressable>
+              ) : (
+                <Icon name="logo-twitter" size={24} color="gray" />
+              )}
             </View>
           </View>
-          
+          </Pressable>
         </View>
       </ScrollView>
     </View>

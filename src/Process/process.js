@@ -202,4 +202,46 @@ const getReviewData = async (id) => {
     }
 }
 
-export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData, getEditProfileData, updateEditProfileData, getReviewData};
+const getEditSocialData = async (id) => {
+    const data = {userid:id};
+    try {
+        const response = await fetch(`${ip}/UserAuth/SocialLink`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+            return result;
+        } else {
+            return {};
+        }
+    } catch (error) {
+        console.error("Failed to get user data:", error);
+        return {};
+    }
+}
+
+const updateEditSocialData = async (data) => {
+    try {
+        const response = await fetch(`${ip}/UserAuth/UpdateSocialLink`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (result.status===1) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+
+export default { Login, Register, checkUser, getUserId, getUserData, getHomeData, getHomeDetailsData, getProfileData, getEditProfileData, updateEditProfileData, getReviewData, getEditSocialData, updateEditSocialData};
