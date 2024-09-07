@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeDetailsData from '../Constant/HomeDetailsData';
 
 // const ip = 'http://192.168.0.101:3001';
-const ip = 'http://192.168.46.44:3001';
+const ip = 'https://credconnect-backend.azurewebsites.net';
 
 const Login = async (data) => {
     const checkdata = {Email:data.user, Password:data.pass, Role:data.role};
