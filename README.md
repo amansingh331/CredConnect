@@ -63,6 +63,7 @@ You can test the API endpoints by making requests to `http://localhost:5000/api`
 
 - **Counsellor Review**:
   - `GET /UserReview/`: Retrieve past sessions for a specific user
+   
 - **Book Counseling Sessions**:
   - `POST /Book/book-session`: Schedule a counseling session with a professional
 
@@ -76,7 +77,7 @@ Once the server is running, you can:
 - **Sign up**: Create a user account or log in if you already have one.
 - **Book Counseling Sessions**: Navigate to the sessions section to schedule your appointments with counselors.
 - **View Session History**: Users can view a list of past counseling sessions and their details.
-- **View CounsellorReview**: Users can view a list of past counseling sessions and their details.
+- **View CounsellorReview**: Users can view a rating and feedback of past counseling sessions and their details.
 
 ## Screenshots
 
@@ -104,5 +105,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 If you have any questions, feel free to reach out:
 
-- **Email**: amansingh@example.com
+- **Email**: amansingh.nitrkl@gmail.com
 - **GitHub**: [amansingh331](https://github.com/amansingh331)
