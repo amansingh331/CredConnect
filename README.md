@@ -55,7 +55,7 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 ### API Integration
 You can test the API endpoints by making requests to http://localhost:5000/api. Below are the key endpoints:
 
-- **User Authentication: /api/login, /api/register
+- **User Authentication:** /api/login, /api/register
 - **Upload Credentials: /api/upload-credential
 - **Verify Credentials: /api/verify-credential/{id}
 Usage
