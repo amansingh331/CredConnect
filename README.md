@@ -17,7 +17,7 @@ CredConnect is a secure platform designed to connect individuals seeking counsel
 - **Backend**: Node.js with Express ([GitHub Repo](https://github.com/amansingh331/credconnect-backend-final))
 - **Database**: MySQL
 - **API**: RESTful APIs for communication between frontend and backend
-- **Other Tools**: Expo for React Native development, JWT for authentication, Axios for API requests
+- **Other Tools**: Expo for React Native development
 
 ## Installation
 
@@ -57,39 +57,49 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 
 You can test the API endpoints by making requests to `http://localhost:5000/api`. Below are the key endpoints:
 
-- **User Authentication**: 
+- **User Authentication**:
   - `POST /api/login`: User login
   - `POST /api/register`: User registration
-- **Upload Credentials**: 
-  - `POST /api/upload-credential`: Upload a user's credential documents
-- **Verify Credentials**: 
-  - `GET /api/verify-credential/{id}`: Verify a specific credential by its ID
 
-Usage
+- **Book Counseling Sessions**:
+  - `POST /api/book-session`: Schedule a counseling session with a professional
+
+- **Session History**:
+  - `GET /api/session-history/{userId}`: Retrieve past sessions for a specific user
+
+## Usage
+
 Once the server is running, you can:
 
-Sign up: Create a user account or log in if you already have one.
-Upload credentials: Navigate to the credentials section to upload your documents for verification.
-Verify credentials: Organizations can log in to verify credentials uploaded by users.
-Screenshots
-User Dashboard
+- **Sign up**: Create a user account or log in if you already have one.
+- **Book Counseling Sessions**: Navigate to the sessions section to schedule your appointments with counselors.
+- **View Session History**: Users can view a list of past counseling sessions and their details.
 
-Organization Dashboard
+## Screenshots
 
-Contributing
+### User Dashboard
+![User Dashboard](screenshots/user-dashboard.png)
+
+### Counselor Dashboard
+![Counselor Dashboard](screenshots/counselor-dashboard.png)
+
+## Contributing
+
 Contributions are welcome! Here's how you can get involved:
 
-Fork the project.
-Create a new branch for your feature: git checkout -b feature/new-feature.
-Commit your changes: git commit -m 'Add a new feature'.
-Push the branch: git push origin feature/new-feature.
-Open a pull request.
-License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+1. Fork the project.
+2. Create a new branch for your feature: `git checkout -b feature/new-feature`.
+3. Commit your changes: `git commit -m 'Add a new feature'`.
+4. Push the branch: `git push origin feature/new-feature`.
+5. Open a pull request.
 
-Contact
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
 If you have any questions, feel free to reach out:
 
-Email: amansingh@example.com
-GitHub: amansingh331
-
+- **Email**: amansingh@example.com
+- **GitHub**: [amansingh331](https://github.com/amansingh331)
