@@ -39,3 +39,53 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 1. Clone this repository:
    ```bash
    git clone https://github.com/amansingh331/CredConnect.git
+
+2 . Navigate to the frontend directory:
+
+bash
+Copy code
+cd CredConnect/frontend
+Install dependencies:
+
+bash
+Copy code
+npm install
+Start the development server:
+
+bash
+Copy code
+npm start
+API Integration
+You can test the API endpoints by making requests to http://localhost:5000/api. Below are the key endpoints:
+
+User Authentication: /api/login, /api/register
+Upload Credentials: /api/upload-credential
+Verify Credentials: /api/verify-credential/{id}
+Usage
+Once the server is running, you can:
+
+Sign up: Create a user account or log in if you already have one.
+Upload credentials: Navigate to the credentials section to upload your documents for verification.
+Verify credentials: Organizations can log in to verify credentials uploaded by users.
+Screenshots
+User Dashboard
+
+Organization Dashboard
+
+Contributing
+Contributions are welcome! Here's how you can get involved:
+
+Fork the project.
+Create a new branch for your feature: git checkout -b feature/new-feature.
+Commit your changes: git commit -m 'Add a new feature'.
+Push the branch: git push origin feature/new-feature.
+Open a pull request.
+License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+Contact
+If you have any questions, feel free to reach out:
+
+Email: amansingh@example.com
+GitHub: amansingh331
+
