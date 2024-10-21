@@ -1,15 +1,15 @@
 # CredConnect
 
-CredConnect is a secure platform designed to connect individuals and organizations for managing and verifying credentials. The system provides a seamless experience for users to upload, verify, and share their credentials with trusted parties.
+CredConnect is a secure platform designed to connect individuals seeking counseling services with certified professionals. The system allows users to book counseling sessions, manage their appointments, and maintain privacy throughout the process.
 
 ## Features
 
 - **User Authentication**: Secure login and registration system using JWT authentication.
-- **Credential Management**: Upload, store, and verify credentials in a user-friendly interface.
-- **Organization Dashboard**: A dashboard for organizations to view and verify users' credentials.
-- **Real-time Notifications**: Users receive notifications for credential verification requests and updates.
-- **Data Encryption**: All credentials and sensitive data are encrypted to ensure maximum security.
-- **API Integration**: Easy-to-use API for third-party services to integrate credential verification functionality.
+- **Appointment Scheduling**: Users can book and manage counseling sessions with certified professionals.
+- **Session History**: Track and view past counseling sessions.
+- **Secure Communication**: Encrypted messaging for users and counselors.
+- **Notifications**: Users receive reminders for upcoming sessions and updates.
+- **API Integration**: Easy-to-use API for third-party services to integrate with the platform.
 
 ## Tech Stack
 
@@ -39,6 +39,7 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 1. Clone this repository:
    ```bash
    git clone https://github.com/amansingh331/CredConnect.git
+
 
 2. Navigate to the frontend directory:
    ```bash
