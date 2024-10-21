@@ -40,22 +40,19 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
    ```bash
    git clone https://github.com/amansingh331/CredConnect.git
 
-2 . Navigate to the frontend directory:
+2. Navigate to the frontend directory:
+   ```bash
+   cd CredConnect/frontend
 
-bash
-Copy code
-cd CredConnect/frontend
-Install dependencies:
+3. Install dependencies:
+   ```bash
+   npm install
 
-bash
-Copy code
-npm install
-Start the development server:
+4. Start the development server:
+   ```bash
+   npm start
 
-bash
-Copy code
-npm start
-API Integration
+### API Integration
 You can test the API endpoints by making requests to http://localhost:5000/api. Below are the key endpoints:
 
 User Authentication: /api/login, /api/register
