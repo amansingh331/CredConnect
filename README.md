@@ -58,14 +58,16 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 You can test the API endpoints by making requests to `http://localhost:5000/api`. Below are the key endpoints:
 
 - **User Authentication**:
-  - `POST /api/login`: User login
-  - `POST /api/register`: User registration
+  - `POST /UserAuth/Login`: User login
+  - `POST /UserAuth/Register`: User registration
 
+- **Counsellor Review**:
+  - `GET /UserReview/`: Retrieve past sessions for a specific user
 - **Book Counseling Sessions**:
-  - `POST /api/book-session`: Schedule a counseling session with a professional
+  - `POST /Book/book-session`: Schedule a counseling session with a professional
 
 - **Session History**:
-  - `GET /api/session-history/{userId}`: Retrieve past sessions for a specific user
+  - `GET /History/session-history/{userId}`: Retrieve past sessions for a specific user
 
 ## Usage
 
@@ -74,6 +76,7 @@ Once the server is running, you can:
 - **Sign up**: Create a user account or log in if you already have one.
 - **Book Counseling Sessions**: Navigate to the sessions section to schedule your appointments with counselors.
 - **View Session History**: Users can view a list of past counseling sessions and their details.
+- **View CounsellorReview**: Users can view a list of past counseling sessions and their details.
 
 ## Screenshots
 
