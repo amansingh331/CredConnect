@@ -10,6 +10,7 @@ CredConnect is a secure platform designed to connect individuals seeking counsel
 - **Secure Communication**: Encrypted messaging for users and counselors.
 - **Notifications**: Users receive reminders for upcoming sessions and updates.
 - **API Integration**: Easy-to-use API for third-party services to integrate with the platform.
+- **VideoChat**: Easy-to-use API for third-party services to integrate with the platform.
 
 ## Tech Stack
 
