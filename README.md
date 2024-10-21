@@ -52,12 +52,18 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
    ```bash
    npm start
 
-### API Integration
-You can test the API endpoints by making requests to http://localhost:5000/api. Below are the key endpoints:
+## API Integration
 
-- **User Authentication:** /api/login, /api/register
-- **Upload Credentials: /api/upload-credential
-- **Verify Credentials: /api/verify-credential/{id}
+You can test the API endpoints by making requests to `http://localhost:5000/api`. Below are the key endpoints:
+
+- **User Authentication**: 
+  - `POST /api/login`: User login
+  - `POST /api/register`: User registration
+- **Upload Credentials**: 
+  - `POST /api/upload-credential`: Upload a user's credential documents
+- **Verify Credentials**: 
+  - `GET /api/verify-credential/{id}`: Verify a specific credential by its ID
+
 Usage
 Once the server is running, you can:
 
