@@ -102,6 +102,21 @@ Once the server is running, you can:
 
 ### Book Now
 <img src="https://github.com/user-attachments/assets/c8af21aa-55c6-4d4e-9a75-b7e6a286c5e6" alt="User Dashboard" width="250"/>
+### Review & Rating
+<img src="https://github.com/user-attachments/assets/02a18922-1ed1-4187-a3cf-b36570c7546e" alt="User Dashboard" width="250"/>
+### Notifications
+<img src="https://github.com/user-attachments/assets/aad2cc8a-5e1b-4fcb-b675-a45f81b9f843" alt="User Dashboard" width="250"/>
+### Messages
+<img src="https://github.com/user-attachments/assets/36b227b4-f724-4222-8693-f5259cb99328" alt="User Dashboard" width="250"/>
+<img src="https://github.com/user-attachments/assets/863f2975-3258-4d33-8c5a-b0eacbc02de4" alt="User Dashboard" width="250"/>
+
+### Help
+<img src="https://github.com/user-attachments/assets/59d4f9d2-50c1-4afb-8d3c-aa1692490575" alt="User Dashboard" width="250"/>
+
+### User Profile & Update Profile
+<img src="https://github.com/user-attachments/assets/e389fcae-73ac-4aab-83ec-69d41634ebc8" alt="User Dashboard" width="250"/>
+<img src="https://github.com/user-attachments/assets/cc5bbb82-4e71-4ff9-a5ce-5f67d2962f74" alt="User Dashboard" width="250"/>
+<img src="https://github.com/user-attachments/assets/f9fa2f07-f205-43cb-a528-0dd88396627b" alt="User Dashboard" width="250"/>
 
 ### Counselor Dashboard
 ![Counselor Dashboard](screenshots/counselor-dashboard.png)
