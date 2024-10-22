@@ -96,6 +96,7 @@ Once the server is running, you can:
 
 ### Counselor Dashboard
 ![Counselor Dashboard](screenshots/counselor-dashboard.png)
+<img src="https://github.com/user-attachments/assets/470b6f09-5309-43ee-b216-e9ba965b9f11" alt="User Dashboard" width="400"/>
 
 ## Contributing
 
