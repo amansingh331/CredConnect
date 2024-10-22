@@ -92,7 +92,7 @@ Once the server is running, you can:
 ## Screenshots
 
 ### User Dashboard
-![User Dashboard]([screenshots/user-dashboard.png](https://github.com/user-attachments/assets/470b6f09-5309-43ee-b216-e9ba965b9f11))
+![User Dashboard](https://github.com/user-attachments/assets/470b6f09-5309-43ee-b216-e9ba965b9f11))
 
 ### Counselor Dashboard
 ![Counselor Dashboard](screenshots/counselor-dashboard.png)
