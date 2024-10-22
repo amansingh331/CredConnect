@@ -97,6 +97,12 @@ Once the server is running, you can:
 ### Counselor details
 <img src="https://github.com/user-attachments/assets/d9f66744-db35-4ffd-952c-cd5e7f56240c" alt="User Dashboard" width="250"/>
 
+### Counselor Profile
+<img src="https://github.com/user-attachments/assets/aa0a9c72-5bd8-4c61-9d99-00eacfa989c6" alt="User Dashboard" width="250"/>
+
+### Book Now
+<img src="https://github.com/user-attachments/assets/c8af21aa-55c6-4d4e-9a75-b7e6a286c5e6" alt="User Dashboard" width="250"/>
+
 ### Counselor Dashboard
 ![Counselor Dashboard](screenshots/counselor-dashboard.png)
 
