@@ -10,7 +10,9 @@ CredConnect is a secure platform designed to connect individuals seeking counsel
 - **Secure Communication**: Encrypted messaging for users and counselors.
 - **Notifications**: Users receive reminders for upcoming sessions and updates.
 - **API Integration**: Easy-to-use API for third-party services to integrate with the platform.
-- **VideoChat**: Easy-to-use API for third-party services to integrate with the platform.
+- **VideoChat**: Encrypted video chat for users and counselors.
+- **AudioChat**: Encrypted video chat for users and counselors.
+- **Review**: User can give review and rating about the counselling.
 
 ## Tech Stack
 
@@ -79,6 +81,8 @@ Once the server is running, you can:
 - **Book Counseling Sessions**: Navigate to the sessions section to schedule your appointments with counselors.
 - **View Session History**: Users can view a list of past counseling sessions and their details.
 - **View CounsellorReview**: Users can view a rating and feedback of past counseling sessions and their details.
+- **VideoChat**: Users can do video call for counseling sessions and their details.
+- **Message**: Users can send message to the counselors.
 
 ## Screenshots
 
