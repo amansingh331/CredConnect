@@ -4,7 +4,7 @@ CredConnect is a secure platform designed to connect individuals seeking counsel
 
 ## Features
 
-- **User Authentication**: Secure login and registration system using JWT authentication.
+- **User Authentication**: Secure login and registration system using.
 - **Appointment Scheduling**: Users can book and manage counseling sessions with certified professionals.
 - **Session History**: Track and view past counseling sessions.
 - **Secure Communication**: Encrypted messaging for users and counselors.
