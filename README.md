@@ -94,6 +94,9 @@ Once the server is running, you can:
 ### User Home
 <img src="https://github.com/user-attachments/assets/470b6f09-5309-43ee-b216-e9ba965b9f11" alt="User Dashboard" width="250"/>
 
+### Counselor details
+<img src="https://github.com/user-attachments/assets/d9f66744-db35-4ffd-952c-cd5e7f56240c" alt="User Dashboard" width="250"/>
+
 ### Counselor Dashboard
 ![Counselor Dashboard](screenshots/counselor-dashboard.png)
 
