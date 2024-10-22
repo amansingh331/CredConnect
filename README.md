@@ -61,7 +61,7 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 You can test the API endpoints by making requests to `http://yourLocalIpAddress:3000/api`. Below are the key endpoints:
 
 - **yourLocalIpAddres**:
-- In terminal write ifconfig and get from there
+- In terminal write the below to get the yourLocalIpAddress
   - `ifconfig`: For Mac
   - `ipconfig`: For Window
 
