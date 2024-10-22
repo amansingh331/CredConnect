@@ -58,7 +58,12 @@ The backend code can be found in a separate repository: [credconnect-backend-fin
 
 ## API Integration
 
-You can test the API endpoints by making requests to `http://localhost:5000/api`. Below are the key endpoints:
+You can test the API endpoints by making requests to `http://yourLocalIpAddress:3000/api`. Below are the key endpoints:
+yourLocalIpAddress - In terminal write ifconfig and get from there
+for mac - ifconfig
+for window - ipconfig
+
+
 
 - **User Authentication**:
   - `POST /UserAuth/Login`: User login
