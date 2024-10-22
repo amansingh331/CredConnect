@@ -90,6 +90,10 @@ Once the server is running, you can:
 - **Message**: Users can send message to the counselors.
 
 ## Screenshots
+### Login, Register & Forget
+<img src="https://github.com/user-attachments/assets/cfb3cd0e-ecad-446e-b006-d65381753119" alt="Auth Screen" width="200"/>
+<img src="https://github.com/user-attachments/assets/ad9dac3f-408f-423e-bfca-a68737f6131b" alt="Auth Screen" width="200"/>
+<img src="https://github.com/user-attachments/assets/eec4de26-61b9-4b61-86d9-a1f0f96e4cb2" alt="Auth Screen" width="200"/>
 
 ### User Home
 <img src="https://github.com/user-attachments/assets/470b6f09-5309-43ee-b216-e9ba965b9f11" alt="User Dashboard" width="200"/>
